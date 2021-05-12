@@ -6,11 +6,13 @@ import './core/db'
 import express from 'express'
 import cors from 'cors'
 
+import { subscriptionRouter } from './routers/subscription.router'
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 
+app.use('/api/subscriptions', subscriptionRouter)
 
 app.listen(process.env.PORT, () => {
   console.log(`SERVER RUNNING at http://localhost:${process.env.PORT}`)

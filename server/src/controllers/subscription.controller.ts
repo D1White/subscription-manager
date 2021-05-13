@@ -1,8 +1,11 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
+
 import { SubscriptionModel } from '../models/subscription.model'
-import { UserModel } from '../models/user.model'
+import { IUserRequest } from './user.controller'
+
 import { isValidObjectId } from '../utils/isValidObjectId'
+import { errorResponse } from '../utils/errorResponse'
 
 class SubscriptionController {
   async index(_, res: Response) {
@@ -12,12 +15,12 @@ class SubscriptionController {
       res.json({
         data: subscr,
       })
-    } catch (error) {
-      res.status(500).json({ message: error })
+    } catch (err) {
+      errorResponse(res, err)
     }
   }
 
-  async create(req: Request, res: Response) {
+  async create(req: IUserRequest, res: Response) {
     try {
       const errors = validationResult(req)
       if (!errors.isEmpty()) {
@@ -33,16 +36,14 @@ class SubscriptionController {
         payment_day: req.body.payment_day,
         color: req.body.color,
         icon: req.body.icon,
-        // user_id: req.user._id,
+        user_id: req.user._id,
       }
 
       const subscr = await SubscriptionModel.create(data)
 
       res.status(201).json(subscr)
-    } catch (error) {
-      res.status(500).json({
-        message: error,
-      })
+    } catch (err) {
+      errorResponse(res, err)
     }
   }
 
@@ -76,10 +77,8 @@ class SubscriptionController {
       )
 
       res.json(subscr)
-    } catch (error) {
-      res.status(500).json({
-        message: error,
-      })
+    } catch (err) {
+      errorResponse(res, err)
     }
   }
 
@@ -98,10 +97,8 @@ class SubscriptionController {
           res.status(204).send()
         }
       })
-    } catch (error) {
-      res.status(500).json({
-        message: error,
-      })
+    } catch (err) {
+      errorResponse(res, err)
     }
   }
 }

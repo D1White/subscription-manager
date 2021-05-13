@@ -1,6 +1,13 @@
-import { model, Schema } from 'mongoose'
+import { model, Schema, Document, Model } from 'mongoose'
 
-const UserSchema = new Schema({
+export interface IUser extends Document {
+  username: string
+  email: string
+  password: string
+  avatar: string
+}
+
+const UserSchema: Schema = new Schema({
   username: {
     required: true,
     unique: true,
@@ -27,4 +34,4 @@ UserSchema.set('toJSON', {
   },
 })
 
-export const UserModel = model('User', UserSchema)
+export const UserModel: Model<IUser> = model('User', UserSchema)

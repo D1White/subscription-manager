@@ -22,5 +22,5 @@ export const userValidation = [
       max: 50,
     })
     .withMessage('The allowed number of characters in a password is from 3 to 50'),
-  body('avatar', 'Enter user avatar').isString().withMessage('Not correct avatar'),
+  body('avatar', 'Enter user avatar').optional().isString().withMessage('Not correct avatar'),
 ]

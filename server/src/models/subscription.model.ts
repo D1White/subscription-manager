@@ -1,6 +1,15 @@
-import { model, Schema } from 'mongoose'
+import { model, Schema, Document, Model } from 'mongoose'
 
-const SubscriptionSchema = new Schema({
+export interface ISubscription extends Document {
+  name: string
+  price: number
+  payment_day: number
+  color: string
+  icon: string
+  user_id: string
+}
+
+const SubscriptionSchema: Schema = new Schema({
   name: {
     required: true,
     type: String,
@@ -26,4 +35,4 @@ const SubscriptionSchema = new Schema({
   },
 })
 
-export const SubscriptionModel = model('Subscription', SubscriptionSchema)
+export const SubscriptionModel: Model<ISubscription> = model('Subscription', SubscriptionSchema)

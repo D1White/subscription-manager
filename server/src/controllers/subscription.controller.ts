@@ -8,9 +8,11 @@ import { isValidObjectId } from '../utils/isValidObjectId'
 import { errorResponse } from '../utils/errorResponse'
 
 class SubscriptionController {
-  async index(_, res: Response) {
+  async index(req: IUserRequest, res: Response) {
     try {
-      const subscr = await SubscriptionModel.find({}).exec()
+      const user = req.user.toJSON()
+
+      const subscr = await SubscriptionModel.find({ user_id: user._id }).exec()
 
       res.json({
         data: subscr,
@@ -30,13 +32,15 @@ class SubscriptionController {
         return
       }
 
+      const user = req.user.toJSON()
+
       const data = {
         name: req.body.name,
         price: req.body.price,
         payment_day: req.body.payment_day,
         color: req.body.color,
         icon: req.body.icon,
-        user_id: req.user._id,
+        user_id: user._id,
       }
 
       const subscr = await SubscriptionModel.create(data)
@@ -47,7 +51,7 @@ class SubscriptionController {
     }
   }
 
-  async update(req: Request, res: Response) {
+  async update(req: IUserRequest, res: Response) {
     try {
       const errors = validationResult(req)
       if (!errors.isEmpty()) {
@@ -63,8 +67,18 @@ class SubscriptionController {
         return
       }
 
-      const subscr = await SubscriptionModel.updateOne(
-        { _id: subscrId },
+      const user = req.user.toJSON()
+
+      const subscr = await SubscriptionModel.findById(subscrId).exec()
+      if (JSON.stringify(subscr.user_id) !== JSON.stringify(user._id)) {
+        res.status(401).json({
+          message: 'Not enough rights!',
+        })
+        return
+      }
+
+      await SubscriptionModel.findByIdAndUpdate(
+        subscrId,
         {
           $set: {
             name: req.body.name,
@@ -74,19 +88,34 @@ class SubscriptionController {
             icon: req.body.icon,
           },
         },
+        (err) => {
+          if (err) {
+            res.status(404).send()
+          } else {
+            res.status(204).send()
+          }
+        },
       )
-
-      res.json(subscr)
     } catch (err) {
       errorResponse(res, err)
     }
   }
 
-  async delete(req: Request, res: Response) {
+  async delete(req: IUserRequest, res: Response) {
     try {
       const subscrId = req.params.id
       if (!isValidObjectId(subscrId)) {
         res.status(404).send()
+        return
+      }
+
+      const user = req.user.toJSON()
+
+      const subscr = await SubscriptionModel.findById(subscrId).exec()
+      if (JSON.stringify(subscr.user_id) !== JSON.stringify(user._id)) {
+        res.status(401).json({
+          message: 'Not enough rights!',
+        })
         return
       }
 

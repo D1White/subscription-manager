@@ -10,14 +10,16 @@ import { passport } from './core/passport'
 
 import { subscriptionRouter } from './routers/subscription.router'
 import { usersRouter } from './routers/user.router'
+import { authRouter } from './routers/auth.router'
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(passport.initialize())
 
-app.use('/api/subscriptions', subscriptionRouter)
+app.use('/api/subscription', subscriptionRouter)
 app.use('/api/user', usersRouter)
+app.use('/api', authRouter)
 
 app.listen(process.env.PORT, () => {
   console.log(`SERVER RUNNING at http://localhost:${process.env.PORT}`)

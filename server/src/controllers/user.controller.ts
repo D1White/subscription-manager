@@ -14,30 +14,16 @@ export interface IUserRequest extends Request {
 }
 
 class UserController {
-  async index(_, res: Response) {
+  async me(req: IUserRequest, res: Response) {
     try {
-      const users = await UserModel.find({}).exec()
+      const user = req.user ? req.user.toJSON() : undefined
+      const subscr = await SubscriptionModel.find({ user_id: req.user._id })
+        .select('-user_id -__v')
+        .exec()
 
       res.json({
-        data: users,
-      })
-    } catch (err) {
-      errorResponse(res, err)
-    }
-  }
-
-  async show(req: Request, res: Response) {
-    try {
-      const userId = req.params.id
-      if (!isValidObjectId(userId)) {
-        res.status(404).send()
-        return
-      }
-
-      const user = await UserModel.findById(userId).exec()
-
-      res.json({
-        data: user,
+        ...user,
+        subscr,
       })
     } catch (err) {
       errorResponse(res, err)
@@ -99,8 +85,16 @@ class UserController {
         return
       }
 
-      const user = await UserModel.updateOne(
-        { _id: userId },
+      const headerUser = req.user.toJSON()
+      if (JSON.stringify(userId) !== JSON.stringify(headerUser._id)) {
+        res.status(401).json({
+          message: 'Not enough rights!',
+        })
+        return
+      }
+
+      const user = await UserModel.findByIdAndUpdate(
+        userId,
         {
           $set: {
             username: req.body.username,
@@ -108,7 +102,8 @@ class UserController {
             avatar: req.body.avatar,
           },
         },
-      )
+        { new: true },
+      ).exec()
 
       res.json(user)
     } catch (err) {
@@ -124,6 +119,14 @@ class UserController {
         return
       }
 
+      const headerUser = req.user.toJSON()
+      if (userId !== JSON.stringify(headerUser._id)) {
+        res.status(401).json({
+          message: 'Not enough rights!',
+        })
+        return
+      }
+
       await UserModel.findByIdAndDelete(userId, {}, (err) => {
         if (err) {
           res.status(404).send()
@@ -133,22 +136,6 @@ class UserController {
       })
 
       await SubscriptionModel.deleteMany({ user_id: userId })
-    } catch (err) {
-      errorResponse(res, err)
-    }
-  }
-
-  async me(req: IUserRequest, res: Response) {
-    try {
-      const user = req.user ? req.user.toJSON() : undefined
-      const subscr = await SubscriptionModel.find({ user_id: req.user._id })
-        .select('-user_id -__v')
-        .exec()
-
-      res.json({
-        ...user,
-        subscr,
-      })
     } catch (err) {
       errorResponse(res, err)
     }

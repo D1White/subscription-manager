@@ -4,7 +4,7 @@ export interface IUser extends Document {
   username: string
   email: string
   password: string
-  avatar: string
+  avatar?: string
 }
 
 const UserSchema: Schema = new Schema({
@@ -23,7 +23,8 @@ const UserSchema: Schema = new Schema({
     type: String,
   },
   avatar: {
-    type: String,
+    ref: 'Image',
+    type: Schema.Types.ObjectId,
   },
 })
 

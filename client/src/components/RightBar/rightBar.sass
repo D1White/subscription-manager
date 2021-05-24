@@ -1,0 +1,81 @@
+.rightBar
+  width: 35%
+  max-width: 520px
+  height: calc( 100% - 100px)
+  padding: 0 30px
+  margin: 50px 0
+  border-left: 2px solid $light_line
+
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+  &__user-block
+    display: flex
+    justify-content: center
+    align-items: center
+
+  &__info,
+  &__info-block
+    display: flex
+    flex-direction: column
+    align-items: center
+
+.user-block
+  &__info,
+  &__buttons
+    display: flex
+    align-items: center
+  &__info
+    margin-right: 30px
+  &__avatar
+    width: 75px
+    height: 75px
+    border-radius: 50%
+    margin-right: 15px
+  &__btn
+    width: 24px
+    height: 24px
+    background-color: $light_bg
+    transition: transform .1s
+    &:not(&:last-child)
+      margin-right: 30px
+    &.edit
+      background-image: url("../../assets/ico/edit.svg")
+    &.logout
+      background-image: url("../../assets/ico/logout.svg")
+    &:active
+      transform: scale(0.8)
+
+.info-block
+  &__text
+    font-size: 18px
+    &-bold
+      font-size: 20px
+      font-weight: 500
+    &-main
+      font-size: 48px
+      font-weight: 700
+  &__profit
+    display: flex
+    align-items: flex-start
+  &__btn
+    width: 20px
+    height: 20px
+    margin-top: 5px
+    margin-left: 10px
+    background: none
+    &>svg
+      fill: #323232
+      opacity: 0.25
+      transition: opacity .2s, transform .1s
+    &:hover>svg
+      opacity: 0.5
+    &:active>svg
+      transform: scale(0.8)
+  &__line
+    width: 60%
+    height: 2px
+    background-color: $light_line
+    border: 0
+    margin: 25px 0

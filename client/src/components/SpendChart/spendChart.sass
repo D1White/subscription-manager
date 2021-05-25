@@ -1,0 +1,65 @@
+$circle-size: 200px
+$circle-radius: 90
+
+@function get-dash-value($radius, $percentage)
+  $circumference: 2 * 3.1415927 * $radius
+  $percentage-as-decimal: $percentage / 100%
+  @return $circumference * $percentage-as-decimal
+
+.spend-chart
+  width: 80%
+  padding: 12px 12px
+  border-radius: 33px
+  background-color: #EEEEEE
+  box-shadow: inset -1px -1px 5px rgba(174, 174, 192, 0.4), inset 1.5px 1.5px 5px rgba(255, 255, 255, 0.7)
+
+  &__container
+    padding: 40px 50px
+    border-radius: 30px
+    background-color: $light_bg
+    box-shadow: inset 1.5px 1.5px 3px rgba(174, 174, 192, 0.25), inset -1px -1px 3px rgba(255, 255, 255, 0.7)
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+
+  &__text
+    font-size: 18px
+    margin-bottom: 40px
+
+  &__chart
+    width: $circle-size
+    height: $circle-size
+    position: relative
+    display: flex
+    align-items: center
+    justify-content: center
+
+  &__circle
+    position: absolute
+    z-index: 5
+    fill: transparent
+    stroke-dasharray: get-dash-value($circle-radius, 100%)
+    stroke-linecap: round
+    stroke-width: 20
+    transform-origin: 50% 50%
+
+    transition: stroke-dashoffset .5s
+    &-bg
+      position: absolute
+      z-index: 1
+      stroke: #F4F2F5
+      fill: transparent
+      stroke-width: 20
+      transform-origin: 50% 50%
+
+.chart
+  &__text
+    font-size: 18px
+    &-percent
+      font-size: 37px
+      font-weight: 500
+    &-block
+      display: flex
+      flex-direction: column
+      align-items: center

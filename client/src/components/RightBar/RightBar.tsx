@@ -1,6 +1,6 @@
 import React from 'react'
-import { SpendChart } from '../index'
-import { ReactComponent as EditIco } from '../../assets/ico/edit2.svg'
+import { SpendChart } from 'components'
+import { ReactComponent as EditIco } from 'assets/ico/edit2.svg'
 
 import avatar from '../../assets/img/avatar.png'
 

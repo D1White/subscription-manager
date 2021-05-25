@@ -19,20 +19,20 @@ const RightBar = () => {
       </div>
       <div className="rightBar__info">
         <div className="rightBar__info-block">
-          <span className="info-block__text-bold">Your Profit</span>
+          <span className="text-s medium">Your Profit</span>
           <div className="info-block__profit">
-            <span className="info-block__text-main">1 209.59</span>
+            <span className="text-xl bold">1 209.59</span>
             <button className="info-block__btn">
               <EditIco />
             </button>
           </div>
-          <span className="info-block__text">USD/month</span>
+          <span className="text-xs">USD/month</span>
         </div>
         <hr className="info-block__line" />
         <div className="rightBar__info-block">
-          <span className="info-block__text-bold">Subscription</span>
-          <span className="info-block__text-main">35.86</span>
-          <span className="info-block__text">USD/month</span>
+          <span className="text-s medium">Subscription</span>
+          <span className="text-xl bold">35.86</span>
+          <span className="text-xs">USD/month</span>
         </div>
       </div>
       <SpendChart />

@@ -1,10 +1,10 @@
 import React from 'react'
-import { RightBar } from './components'
+import { RightBar, LeftBar } from './components'
 
 function App() {
   return (
     <>
-      <div className="" style={{ width: '100%' }}></div>
+      <LeftBar />
       <RightBar />
     </>
   )

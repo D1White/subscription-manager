@@ -16,14 +16,20 @@ export interface IUserRequest extends Request {
 class UserController {
   async me(req: IUserRequest, res: Response) {
     try {
-      const user = req.user ? req.user.toJSON() : undefined
-      const subscr = await SubscriptionModel.find({ user_id: req.user._id })
-        .select('-user_id -__v')
-        .exec()
+      const userId = req.user._id
+      if (!isValidObjectId(userId)) {
+        res.status(404).send()
+        return
+      }
+
+      const user = await UserModel.findById(userId).populate('avatar')
+
+      // const subscr = await SubscriptionModel.find({ user_id: req.user._id })
+      //   .select('-user_id -__v')
+      //   .exec()
 
       res.json({
-        ...user,
-        subscr,
+        user,
       })
     } catch (err) {
       errorResponse(res, err)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { SpendChart } from 'components'
-import { ReactComponent as EditIco } from 'assets/ico/edit2.svg'
+import { ReactComponent as EditIco } from 'assets/ico/edit-2.svg'
 
 import avatar from '../../assets/img/avatar.png'
 
@@ -19,7 +19,7 @@ const RightBar = () => {
       </div>
       <div className="rightBar__info">
         <div className="rightBar__info-block">
-          <span className="text-s medium">Your Profit</span>
+          <span className="text-s text_medium">Your Profit</span>
           <div className="info-block__profit">
             <span className="text-xl bold">1 209.59</span>
             <button className="info-block__btn">
@@ -30,7 +30,7 @@ const RightBar = () => {
         </div>
         <hr className="info-block__line" />
         <div className="rightBar__info-block">
-          <span className="text-s medium">Subscription</span>
+          <span className="text-s text_medium">Subscription</span>
           <span className="text-xl bold">35.86</span>
           <span className="text-xs">USD/month</span>
         </div>

@@ -1,11 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./sass/app.sass";
-import App from "./App";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './sass/app.sass'
+import App from './App'
+
+import { RootStateProvider } from 'store/RootStateContext'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RootStateProvider>
+      <App />
+    </RootStateProvider>
   </React.StrictMode>,
-  document.getElementById("root")
-);
+  document.getElementById('root'),
+)

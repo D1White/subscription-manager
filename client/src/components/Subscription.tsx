@@ -1,14 +1,14 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import hexToRGB from 'services/hexToRGB'
 import { ReactComponent as DeleteIco } from 'assets/ico/delete.svg'
 import { ReactComponent as EditIco } from 'assets/ico/edit-2.svg'
 
 interface SubscriptionProps {
-  service: string;
-  price: number;
-  date: number;
-  color?: string;
-  img?: string;
+  service: string
+  price: number
+  date: number
+  color?: string
+  img?: string
 }
 
 const Subscription: FC<SubscriptionProps> = ({ service, price, date, color, img }) => {

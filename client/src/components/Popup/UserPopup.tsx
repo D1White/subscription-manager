@@ -3,7 +3,7 @@ import { Portal, PopupInput } from 'components'
 import { useOutsideHook } from 'services/useOutsideHook'
 
 import { ReactComponent as CloseIco } from 'assets/ico/close.svg'
-import { PopupProps } from 'types/popup.interface'
+import { PopupProps } from 'types/IPopup'
 
 const UserPopup: FC<PopupProps> = ({ setPopupVisible }) => {
   const popupRef = useRef<HTMLDivElement>(null)
@@ -17,7 +17,7 @@ const UserPopup: FC<PopupProps> = ({ setPopupVisible }) => {
     if (outsideClick) {
       closePopup()
     }
-  }, [outsideClick])
+  }, [outsideClick]) // eslint-disable-line
 
   return (
     <Portal>

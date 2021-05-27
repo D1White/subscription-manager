@@ -2,7 +2,7 @@ import { useState, useEffect, FC, ReactElement } from 'react'
 import ReactDOM from 'react-dom'
 
 interface PortalProps {
-  children: ReactElement<HTMLDivElement>;
+  children: ReactElement<HTMLDivElement>
 }
 
 const Portal: FC<PortalProps> = ({ children }) => {
@@ -13,7 +13,7 @@ const Portal: FC<PortalProps> = ({ children }) => {
     return () => {
       document.body.removeChild(container)
     }
-  }, [])
+  }, []) // eslint-disable-line
 
   return ReactDOM.createPortal(children, container)
 }

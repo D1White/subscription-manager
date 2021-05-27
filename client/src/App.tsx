@@ -1,11 +1,10 @@
 import React from 'react'
-import { RightBar, LeftBar } from './components'
+import { Main } from 'pages'
 
 function App() {
   return (
     <>
-      <LeftBar />
-      <RightBar />
+      <Main />
     </>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import getDashValue from 'utils/getDashValue'
+import getDashValue from 'services/getDashValue'
 
 const SpendChart = () => {
   const [percent, setPercent] = useState(90)

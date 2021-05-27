@@ -13,7 +13,7 @@ const LeftBar = () => {
           <span>add</span>
         </button>
       </div>
-      <div className="left-bar__table">
+      <div className="table">
         <div className="table__line table__line_header">
           <div className="table__cell"></div>
           <div className="table__cell">
@@ -30,15 +30,17 @@ const LeftBar = () => {
           </div>
         </div>
         <hr className="table__border" />
-        {mockSubscr.map((subscr, index) => (
-          <Subscription
-            service={subscr.service}
-            price={subscr.price}
-            date={subscr.date}
-            color={subscr.color}
-            key={index}
-          />
-        ))}
+        <div className="table__container">
+          {mockSubscr.map((subscr, index) => (
+            <Subscription
+              service={subscr.service}
+              price={subscr.price}
+              date={subscr.date}
+              color={subscr.color}
+              key={index}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )

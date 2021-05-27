@@ -1,0 +1,48 @@
+.popup
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 1
+  background-color: rgba(#282828, 0.4)
+  display: grid
+  place-items: center
+
+  &__content
+    padding: 25px 30px 35px 30px
+    background-color: $white
+    box-shadow: 5px 5px 30px $dark_shodow-m
+    border-radius: 30px
+    display: flex
+    flex-direction: column
+
+  &__header
+    display: flex
+    align-items: center
+    justify-content: space-between
+    padding-bottom: 15px
+    margin-bottom: 20px
+    border-bottom: 1px solid $light_line
+
+  &__btn
+    width: 440px
+    height: 42px
+    border-radius: 8px
+    background-color: $dark_light
+
+    font-family: $ff-r
+    +text-s
+    +text-medium
+    color: $white
+
+    transition: background-color .2s
+
+    &:hover
+      background-color: lighten($dark_light, 5)
+    &:active
+      background-color: darken($dark_light, 5)
+
+    &_icon
+      display: grid
+      place-items: center

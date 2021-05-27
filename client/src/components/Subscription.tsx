@@ -20,14 +20,15 @@ const Subscription: FC<SubscriptionProps> = ({ service, price, date, color, img 
         {img ? <img src={img} alt="service" /> : <span style={{ color: color }}>{firstWord}</span>}
       </div>
       <div className="table__cell">
-        <span className="text-m">Netflix</span>
+        <span className="text-m">{service}</span>
       </div>
       <div className="table__cell table__cell_center">
-        <span className="text-m text_bold">$ 14.59</span>
+        <span className="text-m text_bold">{`$ ${price}`}</span>
       </div>
       <div className="table__cell table__cell_center">
         <span className="text-m">
-          12<sub>th</sub>
+          {date}
+          <sub>th</sub>
         </span>
       </div>
       <div className="table__cell table__cell_buttons">

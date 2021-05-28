@@ -1,11 +1,11 @@
 import { useState, useEffect, RefObject } from 'react'
 
-export const useOutsideHook = (ref: RefObject<HTMLDivElement>) => {
+export const useOutsideHook = (ref: HTMLDivElement | null) => {
   const [outsideClick, setOutsideClick] = useState(false)
 
   const handleClickOutside = (event: MouseEvent) => {
     const path = event.composedPath && event.composedPath()
-    if (ref.current && !path.includes(ref.current)) {
+    if (ref && !path.includes(ref)) {
       setOutsideClick(true)
     }
   }

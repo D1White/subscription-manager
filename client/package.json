@@ -14,6 +14,7 @@
     "mobx": "^6.3.2",
     "mobx-react-lite": "^3.2.0",
     "react": "^17.0.2",
+    "react-colorful": "^5.2.0",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",

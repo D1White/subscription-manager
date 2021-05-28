@@ -4,14 +4,14 @@ import { LeftBar, RightBar, SubscriptionPopup, UserPopup, ProfitPopup } from 'co
 import { useRootStore } from 'store/RootStateContext'
 
 const Main = observer(() => {
-  const [sunscrPopupVisible, setSubscrPopupVisible] = useState(false)
+  const [sunscrPopupVisible, setSubscrPopupVisible] = useState(true)
   const [userPopupVisible, setUserPopupVisible] = useState(false)
   const [profitPopupVisible, setProfitPopupVisible] = useState(false)
 
   const { subscriptionStore } = useRootStore()
 
   useEffect(() => {
-    console.log(subscriptionStore)
+    console.log(subscriptionStore.subscriptions)
   }, [subscriptionStore])
 
   return (

@@ -1,4 +1,5 @@
-import { observable, action } from 'mobx'
+import { observable, action, computed } from 'mobx'
+import { getSubscriptionsMock } from 'services/api'
 import { ISubscription } from 'types/ISubscriptions'
 
 export class SubscriptionStore {
@@ -16,11 +17,30 @@ export class SubscriptionStore {
   @observable profit: number = 0
   @observable subscriptions: ISubscription[] = []
 
+  constructor() {
+    this.loadubscr()
+  }
+
   @action
   changeProfit = (profit: number) => {
     this.profit = profit
   }
 
   @action
-  loadubscr = () => {}
+  loadubscr = () => {
+    this.subscriptions = getSubscriptionsMock()
+  }
+
+  @computed get costsPercent() {
+    let cost = 0
+
+    this.subscriptions.forEach((subscr) => {
+      cost += subscr.price
+    })
+
+    if (this.profit === 0) {
+      return 100
+    }
+    return (cost * 100) / this.profit
+  }
 }

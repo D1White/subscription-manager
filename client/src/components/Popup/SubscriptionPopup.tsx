@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, FC } from 'react'
-import { Portal, PopupInput } from 'components'
+import { Portal, PopupInput, PopupFileInput } from 'components'
 import { useOutsideHook } from 'services/useOutsideHook'
 
 import { ReactComponent as CloseIco } from 'assets/ico/close.svg'
@@ -7,7 +7,7 @@ import { PopupProps } from 'types/IPopup'
 
 const SubscriptionPopup: FC<PopupProps> = ({ setPopupVisible }) => {
   const popupRef = useRef<HTMLDivElement>(null)
-  const outsideClick = useOutsideHook(popupRef)
+  const outsideClick = useOutsideHook(popupRef.current)
 
   const closePopup = () => {
     setPopupVisible(false)
@@ -29,6 +29,7 @@ const SubscriptionPopup: FC<PopupProps> = ({ setPopupVisible }) => {
               <CloseIco />
             </button>
           </div>
+          <PopupFileInput title="Color/logo" />
           <PopupInput title="Service name" warning={false} />
           <PopupInput title="Price (USD/month)" warning={false} />
           <PopupInput title="Payment day" warning={false} />

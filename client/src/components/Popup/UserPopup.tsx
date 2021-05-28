@@ -7,7 +7,7 @@ import { PopupProps } from 'types/IPopup'
 
 const UserPopup: FC<PopupProps> = ({ setPopupVisible }) => {
   const popupRef = useRef<HTMLDivElement>(null)
-  const outsideClick = useOutsideHook(popupRef)
+  const outsideClick = useOutsideHook(popupRef.current)
 
   const closePopup = () => {
     setPopupVisible(false)

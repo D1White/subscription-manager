@@ -11,8 +11,8 @@ const Main = observer(() => {
   const { subscriptionStore } = useRootStore()
 
   useEffect(() => {
-    console.log(subscriptionStore.profit)
-  }, [subscriptionStore.profit])
+    console.log(subscriptionStore)
+  }, [subscriptionStore])
 
   return (
     <>

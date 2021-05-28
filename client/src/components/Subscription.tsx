@@ -3,16 +3,10 @@ import hexToRGB from 'services/hexToRGB'
 import { ReactComponent as DeleteIco } from 'assets/ico/delete.svg'
 import { ReactComponent as EditIco } from 'assets/ico/edit-2.svg'
 
-interface SubscriptionProps {
-  service: string
-  price: number
-  date: number
-  color?: string
-  img?: string
-}
+import { ISubscription } from 'types/ISubscriptions'
 
-const Subscription: FC<SubscriptionProps> = ({ service, price, date, color, img }) => {
-  const firstWord = service.slice(0, 1).toUpperCase()
+const Subscription: FC<ISubscription> = ({ name, price, payment_day, color, img }) => {
+  const firstWord = name.slice(0, 1).toUpperCase()
 
   return (
     <div className="table__line">
@@ -20,14 +14,14 @@ const Subscription: FC<SubscriptionProps> = ({ service, price, date, color, img 
         {img ? <img src={img} alt="service" /> : <span style={{ color: color }}>{firstWord}</span>}
       </div>
       <div className="table__cell">
-        <span className="text-m">{service}</span>
+        <span className="text-m">{name}</span>
       </div>
       <div className="table__cell table__cell_center">
         <span className="text-m text_bold">{`$ ${price}`}</span>
       </div>
       <div className="table__cell table__cell_center">
         <span className="text-m">
-          {date}
+          {payment_day}
           <sub>th</sub>
         </span>
       </div>

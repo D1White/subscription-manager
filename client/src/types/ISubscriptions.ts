@@ -4,10 +4,10 @@ export interface ISubscriptions {
   subscriptions: ISubscription[]
 }
 
-export class ISubscription {
-  service: string
+export type ISubscription = {
+  name: string
   price: number
-  date: number
+  payment_day: number
   color?: string
   img?: string
 }

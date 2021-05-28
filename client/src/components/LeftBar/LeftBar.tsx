@@ -33,9 +33,9 @@ const LeftBar = () => {
         <div className="table__container">
           {mockSubscr.map((subscr, index) => (
             <Subscription
-              service={subscr.service}
+              name={subscr.name}
               price={subscr.price}
-              date={subscr.date}
+              payment_day={subscr.payment_day}
               color={subscr.color}
               key={index}
             />

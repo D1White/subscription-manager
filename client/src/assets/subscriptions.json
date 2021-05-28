@@ -1,26 +1,26 @@
 [
   {
-    "service": "Netflix",
+    "name": "Netflix",
     "price": 14.59,
-    "date": 29,
+    "payment_day": 29,
     "color": "#B30711"
   },
   {
-    "service": "YouTube premium",
+    "name": "YouTube premium",
     "price": 15,
-    "date": 1,
+    "payment_day": 1,
     "color": "#FC0D1B"
   },
   {
-    "service": "Figma",
+    "name": "Figma",
     "price": 12,
-    "date": 1,
+    "payment_day": 1,
     "color": "#A259FF"
   },
   {
-    "service": "Patreon (sndx)",
+    "name": "Patreon (sndx)",
     "price": 5,
-    "date": 15,
+    "payment_day": 15,
     "color": "#FFB404"
   }
 ]

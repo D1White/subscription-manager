@@ -1,7 +1,7 @@
-import React, { FC, useState, useEffect, useRef } from 'react'
-import { HexColorPicker } from 'react-colorful'
+import { FC, useState } from 'react'
 
 import Popover from 'components/HOCs/Popover'
+import { ColorPicker } from 'components'
 import { ReactComponent as ColorIco } from 'assets/ico/color-lens.svg'
 
 interface PopupFileInputProps {
@@ -9,33 +9,29 @@ interface PopupFileInputProps {
 }
 
 const PopupFileInput: FC<PopupFileInputProps> = ({ title }) => {
-  const btnRef = useRef(null)
   const [popoverOpen, setPopoverOpen] = useState(false)
-  const [color, setColor] = useState('#1B1B1B')
 
   const [referenceRef, setReferenceRef] = useState<HTMLButtonElement | null>(null)
 
-  const togglePopover = () => {
-    setPopoverOpen((prev) => !prev)
+  const openPopover = () => {
+    setPopoverOpen(true)
   }
 
-  const changeColor = (e: any) => {
-    setColor(e)
-  }
-
-  const close = () => {
-    console.log('adfsad')
+  const closePopover = () => {
+    setPopoverOpen(false)
   }
 
   return (
     <div className="popup-file-input">
       <span className="popup-input__text">{title}</span>
-      <button className="popup-file-input__fake-input" onClick={togglePopover} ref={setReferenceRef}>
+      <button className="popup-file-input__fake-input" onClick={openPopover} ref={setReferenceRef}>
         <ColorIco />
       </button>
-      <Popover reference={referenceRef} onClose={close}>
-        <HexColorPicker color={color} onChange={changeColor} />
-      </Popover>
+      {popoverOpen && (
+        <Popover reference={referenceRef} onClose={closePopover}>
+          <ColorPicker />
+        </Popover>
+      )}
     </div>
   )
 }

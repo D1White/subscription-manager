@@ -1,23 +1,15 @@
-import React, { useEffect, useRef, FC } from 'react'
+import { useRef, FC } from 'react'
 import { Portal, PopupInput, PopupFileInput } from 'components'
-import { useOutsideHook } from 'services/useOutsideHook'
 
 import { ReactComponent as CloseIco } from 'assets/ico/close.svg'
 import { PopupProps } from 'types/IPopup'
 
 const SubscriptionPopup: FC<PopupProps> = ({ setPopupVisible }) => {
   const popupRef = useRef<HTMLDivElement>(null)
-  const outsideClick = useOutsideHook(popupRef.current)
 
   const closePopup = () => {
     setPopupVisible(false)
   }
-
-  useEffect(() => {
-    if (outsideClick) {
-      closePopup()
-    }
-  }, [outsideClick]) // eslint-disable-line
 
   return (
     <Portal>

@@ -1,4 +1,4 @@
-import { useState, useEffect, RefObject } from 'react'
+import { useState, useEffect } from 'react'
 
 export const useOutsideHook = (ref: HTMLDivElement | null) => {
   const [outsideClick, setOutsideClick] = useState(false)

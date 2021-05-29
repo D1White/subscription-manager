@@ -1,0 +1,70 @@
+.color-picker
+  display: flex
+  flex-direction: column
+  align-items: center
+  width: 202px
+  background-color: $white
+  border: 1px solid $light_line
+  border-radius: 13px
+  margin-top: 10px
+
+  &__nav
+    width: 100%
+    display: flex
+  &__btn
+    flex-basis: 50%
+    display: flex
+    align-content: inherit
+    justify-content: center
+    padding: 10px 0
+    border-radius: 13px 0 0 0
+    border-right: 0.5px solid $light_line
+
+    transition: background-color .1s
+
+    &:not(&:first-child)
+      border-radius: 0 13px 0 0
+      border-right: 0
+      border-left: 0.5px solid $light_line
+    &:hover
+      background-color: darken($white, 8)
+    &>svg
+      width: 16px
+      height: 16px
+      margin-right: 7px
+
+    &_active
+      background-color: darken($white, 4)
+
+  &__img-section
+    display: flex
+    flex-direction: column
+    align-items: center
+    padding: 15px 0 25px 0
+
+.color-picker-img
+  &__text
+    font-size: 10px
+    color: $light_line
+    margin-top: 5px
+    margin-bottom: 16px
+  &__area
+    width: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    padding-top: 20px
+    border-radius: 9px
+    border: 1px dashed $light_line
+    cursor: pointer
+
+    transition: background-color .1s
+
+    &:hover
+      background-color: darken($white, 3)
+    &>svg
+      margin-bottom: 10px
+    &>input
+      opacity: 0
+      width: 0
+      height: 0

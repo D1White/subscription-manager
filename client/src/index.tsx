@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 import './sass/app.sass'
 import App from './App'
@@ -8,10 +9,10 @@ import './services/axiosConfig'
 import { RootStateProvider } from 'store/RootStateContext'
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
     <RootStateProvider>
       <App />
     </RootStateProvider>
-  </React.StrictMode>,
+  </BrowserRouter>,
   document.getElementById('root'),
 )

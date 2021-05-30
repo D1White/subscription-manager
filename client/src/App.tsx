@@ -1,11 +1,14 @@
 import React from 'react'
-import { Main } from 'pages'
+import { Switch, Route } from 'react-router-dom'
+
+import { Main, Register } from 'pages'
 
 function App() {
   return (
-    <>
-      <Main />
-    </>
+    <Switch>
+      <Route exact path="/register" component={Register} />
+      <Route exact path="/" component={Main} />
+    </Switch>
   )
 }
 

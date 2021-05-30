@@ -1,6 +1,7 @@
 import { observable, action, computed } from 'mobx'
 import { getSubscriptionsMock } from 'services/api'
 import { ISubscription } from 'types/ISubscriptions'
+import { RootStateContextValue } from './RootStateContext'
 
 export class SubscriptionStore {
   // rootStore
@@ -14,16 +15,14 @@ export class SubscriptionStore {
   //   this.profit = profit
   // }
 
-  @observable profit: number = 0
+  // @observable profit: number = 1209
   @observable subscriptions: ISubscription[] = []
+  private rootStore: RootStateContextValue
 
-  constructor() {
+  constructor(rootStore: RootStateContextValue) {
+    this.rootStore = rootStore
     this.loadubscr()
-  }
-
-  @action
-  changeProfit = (profit: number) => {
-    this.profit = profit
+    // console.log(rootStore)
   }
 
   @action
@@ -31,16 +30,23 @@ export class SubscriptionStore {
     this.subscriptions = getSubscriptionsMock()
   }
 
-  @computed get costsPercent() {
+  @computed get cost(): number {
     let cost = 0
 
     this.subscriptions.forEach((subscr) => {
       cost += subscr.price
     })
 
-    if (this.profit === 0) {
+    return cost
+  }
+
+  @computed get costsPercent(): number {
+    const profit = this.rootStore.userStore.profit
+
+    if (profit === 0) {
       return 100
     }
-    return (cost * 100) / this.profit
+
+    return (this.cost * 100) / profit
   }
 }

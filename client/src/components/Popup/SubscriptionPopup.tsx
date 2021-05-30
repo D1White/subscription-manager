@@ -6,14 +6,21 @@ import { PopupProps } from 'types/IPopup'
 
 const SubscriptionPopup: FC<PopupProps> = ({ setPopupVisible }) => {
   const popupRef = useRef<HTMLDivElement>(null)
+  const popupBgRef = useRef<HTMLDivElement>(null)
 
   const closePopup = () => {
     setPopupVisible(false)
   }
 
+  const popupOutsideClick = (e: any) => {
+    if (e.target === popupBgRef.current && !document.querySelector('.popover')) {
+      closePopup()
+    }
+  }
+
   return (
     <Portal>
-      <div className="popup">
+      <div className="popup" onClick={popupOutsideClick} ref={popupBgRef}>
         <div className="popup__content" ref={popupRef}>
           <div className="popup__header">
             <span className="text-xs text_medium">Edit subscription</span>

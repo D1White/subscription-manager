@@ -1,10 +1,10 @@
 import { FC } from 'react'
 
 interface PopupInputProps {
-  title: string;
-  warning: boolean;
-  warning_text?: string;
-  type?: string;
+  title: string
+  warning: boolean
+  warning_text?: string
+  type?: string
 }
 
 const PopupInput: FC<PopupInputProps> = ({ title, warning, warning_text, type = 'text' }) => {

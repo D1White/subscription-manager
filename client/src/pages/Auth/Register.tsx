@@ -45,7 +45,6 @@ const Register = () => {
 
   const submit = () => {
     if (!warning.username && !warning.email && !warning.password && username && email && password) {
-      console.log('zbs')
       console.log({ username, email, password })
     }
   }

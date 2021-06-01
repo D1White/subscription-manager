@@ -47,6 +47,12 @@ export class SubscriptionStore {
       return 100
     }
 
-    return (this.cost * 100) / profit
+    const percent = Math.round((this.cost * 100) / profit)
+
+    if (percent > 99) {
+      return 100
+    }
+
+    return percent
   }
 }

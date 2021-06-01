@@ -5,6 +5,7 @@ export const useOutsideHook = (ref: HTMLDivElement | null) => {
 
   const handleClickOutside = (event: MouseEvent) => {
     const path = event.composedPath && event.composedPath()
+
     if (ref && !path.includes(ref)) {
       setOutsideClick(true)
     }

@@ -1,17 +1,23 @@
-import { FC } from 'react'
+import { ChangeEvent, Dispatch, FC } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
 
 interface PopupInputProps {
   title: string
   warning: boolean
   warning_text?: string
   type?: string
+  setText?: Dispatch<number>
 }
 
-const PopupInput: FC<PopupInputProps> = ({ title, warning, warning_text, type = 'text' }) => {
+const PopupInput: FC<PopupInputProps> = ({ title, warning, warning_text, type = 'text', setText }) => {
+  const debounced = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setText && setText(parseFloat(e.target.value))
+  }, 500)
+
   return (
     <div className="popup-input">
       <span className="popup-input__text">{title}</span>
-      <input type={type} className="popup-input__field" />
+      <input type={type} className="popup-input__field" onChange={debounced} />
       {warning && <span className="popup-input__text_error">{warning_text ? warning_text : 'error'}</span>}
     </div>
   )

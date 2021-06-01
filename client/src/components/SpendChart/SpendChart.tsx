@@ -1,24 +1,17 @@
-import React, { useState } from 'react'
+import { FC } from 'react'
 import getDashValue from 'services/getDashValue'
 
-const SpendChart = () => {
-  const [percent, setPercent] = useState(90)
+interface SpendChartProps {
+  percent: number
+}
 
-  const handleClick = () => {
-    setPercent(70)
-  }
-
+const SpendChart: FC<SpendChartProps> = ({ percent }) => {
   return (
     <div className="spend-chart">
       <div className="spend-chart__container">
         <span className="spend-chart__text">on subscriptions, you spend:</span>
         <div className="spend-chart__chart">
-          <svg
-            viewBox="0 0 200 200"
-            xmlns="http://www.w3.org/2000/svg"
-            onClick={handleClick}
-            style={{ position: 'absolute' }}
-          >
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={{ position: 'absolute' }}>
             <defs>
               <radialGradient id="grad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
                 <stop offset="70%" style={{ stopColor: '#FF953B' }} />
@@ -36,7 +29,7 @@ const SpendChart = () => {
             />
           </svg>
           <div className="chart__text-block">
-            <span className="chart__text-percent">35%</span>
+            <span className="chart__text-percent">{`${percent}%`}</span>
             <span className="chart__text">of income</span>
           </div>
         </div>

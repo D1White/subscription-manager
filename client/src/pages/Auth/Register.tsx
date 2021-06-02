@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import { AuthInput } from 'components'
+import { AuthApi } from 'api/authApi'
 
 import { ReactComponent as Lines1 } from 'assets/img/lines-1.svg'
 import { ReactComponent as Lines2 } from 'assets/img/lines-2.svg'
@@ -26,7 +27,7 @@ const Register = () => {
 
   useEffect(() => {
     const REGEXP =
-      /^([A-Z|a-z|0-9](\.|_){0,1})+[A-Z|a-z|0-9]\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/gm
+      /^([A-Z|a-z|0-9](\.|_){0,1})+[A-Z|a-z|0-9]\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/gm // eslint-disable-line
 
     if (email && (email.length < 3 || email.length > 50 || !REGEXP.test(email))) {
       setWarning({ ...warning, email: true })
@@ -45,7 +46,15 @@ const Register = () => {
 
   const submit = () => {
     if (!warning.username && !warning.email && !warning.password && username && email && password) {
-      console.log({ username, email, password })
+      AuthApi.register(username, email, password).then((newUser) => {
+        if (newUser) {
+          AuthApi.login(username, password).then((user) => {
+            window.location.href = `/after-register/${user.token}`
+          })
+        } else {
+          window.location.href = '/404'
+        }
+      })
     }
   }
 

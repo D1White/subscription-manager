@@ -17,7 +17,11 @@ const AuthInput: FC<AuthInputProps> = ({ title, warning, warning_text, type = 't
   return (
     <div className="auth-input">
       <span className="auth-input__text">{title}</span>
-      <input type={type} className="auth-input__field" onChange={debounced} />
+      <input
+        type={type}
+        className={`auth-input__field ${warning ? 'auth-input__field_error' : ''}`}
+        onChange={debounced}
+      />
       {warning && <span className="auth-input__text_error">{warning_text ? warning_text : 'error'}</span>}
     </div>
   )

@@ -1,22 +1,24 @@
 import axios from 'axios'
 
+import { IUserRegister, IUserLogin } from 'types/IUser'
+
 export const AuthApi = {
-  async login(username: string, password: string): Promise<any> {
+  async login(username: string, password: string): Promise<IUserLogin> {
     const { data } = await axios.post('/login', {
       username,
       password,
     })
 
-    console.log(data)
+    return data
   },
-  async register(username: string, email: string, password: string): Promise<any> {
+  async register(username: string, email: string, password: string): Promise<IUserRegister> {
     const { data } = await axios.post('/register', {
       username,
       email,
       password,
     })
 
-    console.log(data)
+    return data
   },
   async getMe(): Promise<any> {
     const { data } = await axios.get('/user/me')

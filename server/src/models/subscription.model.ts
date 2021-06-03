@@ -4,8 +4,7 @@ export interface ISubscription extends Document {
   name: string
   price: number
   payment_day: number
-  color?: string
-  icon?: string
+  color: string
   user_id: string
 }
 
@@ -23,11 +22,8 @@ const SubscriptionSchema: Schema = new Schema({
     type: Number,
   },
   color: {
+    require: true,
     type: String,
-  },
-  icon: {
-    ref: 'Image',
-    type: Schema.Types.ObjectId,
   },
   user_id: {
     required: true,

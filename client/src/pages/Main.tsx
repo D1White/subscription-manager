@@ -4,7 +4,7 @@ import { LeftBar, RightBar, SubscriptionPopup, UserPopup } from 'components'
 import { useRootStore } from 'store/RootStateContext'
 
 const Main = observer(() => {
-  const [sunscrPopupVisible, setSubscrPopupVisible] = useState(false)
+  const [sunscrPopupVisible, setSubscrPopupVisible] = useState(true)
   const [userPopupVisible, setUserPopupVisible] = useState(false)
 
   const { subscriptionStore } = useRootStore()

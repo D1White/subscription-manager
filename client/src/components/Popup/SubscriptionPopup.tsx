@@ -1,5 +1,5 @@
 import { useRef, FC } from 'react'
-import { Portal, PopupInput, PopupFileInput } from 'components'
+import { Portal, PopupInput, PopupColorInput } from 'components'
 
 import { ReactComponent as CloseIco } from 'assets/ico/close.svg'
 import { PopupProps } from 'types/IPopup'
@@ -28,7 +28,7 @@ const SubscriptionPopup: FC<PopupProps> = ({ setPopupVisible }) => {
               <CloseIco />
             </button>
           </div>
-          <PopupFileInput title="Color/logo" />
+          <PopupColorInput />
           <PopupInput title="Service name" warning={false} />
           <PopupInput title="Price (USD/month)" warning={false} />
           <PopupInput title="Payment day" warning={false} />

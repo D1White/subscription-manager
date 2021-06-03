@@ -146,45 +146,6 @@ class UserController {
       errorResponse(res, err)
     }
   }
-
-  async changeAvatar(req: IUserRequest, res: Response) {
-    try {
-      const userId = req.params.id
-      if (!isValidObjectId(userId)) {
-        res.status(404).send()
-        return
-      }
-
-      const headerUser = req.user.toJSON()
-      if (JSON.stringify(userId) !== JSON.stringify(headerUser._id)) {
-        res.status(401).json({
-          message: 'Not enough rights!',
-        })
-        return
-      }
-
-      const avatarId = req.body.avatar
-
-      if (!avatarId) {
-        res.status(404).send()
-        return
-      }
-
-      const user = await UserModel.findByIdAndUpdate(
-        userId,
-        {
-          $set: {
-            avatar: avatarId,
-          },
-        },
-        { new: true },
-      ).exec()
-
-      res.json(user)
-    } catch (err) {
-      errorResponse(res, err)
-    }
-  }
 }
 
 export const UserCtrl = new UserController()

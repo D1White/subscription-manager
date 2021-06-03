@@ -8,6 +8,5 @@ export type ISubscription = {
   name: string
   price: number
   payment_day: number
-  color?: string
-  img?: string
+  color: string
 }

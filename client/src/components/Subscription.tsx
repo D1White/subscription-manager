@@ -5,13 +5,13 @@ import { ReactComponent as EditIco } from 'assets/ico/edit-2.svg'
 
 import { ISubscription } from 'types/ISubscriptions'
 
-const Subscription: FC<ISubscription> = ({ name, price, payment_day, color, img }) => {
+const Subscription: FC<ISubscription> = ({ name, price, payment_day, color }) => {
   const firstWord = name.slice(0, 1).toUpperCase()
 
   return (
     <div className="table__line">
       <div className="table__color" style={color ? { backgroundColor: hexToRGB(color, 0.25) } : {}}>
-        {img ? <img src={img} alt="service" /> : <span style={{ color: color }}>{firstWord}</span>}
+        <span style={{ color: color }}>{firstWord}</span>
       </div>
       <div className="table__cell">
         <span className="text-m">{name}</span>

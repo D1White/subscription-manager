@@ -19,7 +19,7 @@ const PopupInput: FC<PopupInputProps> = ({ title, warning, warning_text, type = 
       <span className="popup-input__text">{title}</span>
       <input
         type={type}
-        className={`"popup-input__field ${warning ? '"popup-input__field_error' : ''}`}
+        className={`popup-input__field ${warning ? 'popup-input__field_error' : ''}`}
         onChange={debounced}
       />
       {warning && <span className="popup-input__text_error">{warning_text ? warning_text : 'error'}</span>}

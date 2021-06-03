@@ -12,6 +12,5 @@ export const subscriptionValidation = [
   body('payment_day', 'Enter payment day')
     .isInt({ min: 1, max: 31 })
     .withMessage('The allowed payment day is from 1 to 31'),
-  body('color', 'Enter HEX color').optional().isHexColor().withMessage('Not correct HEX color'),
-  body('icon', 'Enter icon').optional().isString().withMessage('Not correct icon'),
+  body('color', 'Enter HEX color').isHexColor().withMessage('Not correct HEX color'),
 ]

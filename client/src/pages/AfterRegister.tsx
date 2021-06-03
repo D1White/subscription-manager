@@ -1,16 +1,12 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
-
-interface ParamTypes {
-  step: string
-}
+import { AfterRegisterPopup } from 'components'
 
 const AfterRegister = () => {
-  const { step } = useParams<ParamTypes>()
+  console.log(localStorage.getItem('token'))
 
   return (
     <div>
-      <h1>{step}</h1>
+      <AfterRegisterPopup />
     </div>
   )
 }

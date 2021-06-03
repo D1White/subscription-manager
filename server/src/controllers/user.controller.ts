@@ -50,7 +50,7 @@ class UserController {
         username: req.body.username,
         email: req.body.email,
         password: generateMD5(req.body.password + process.env.SECRET_KEY),
-        avatar: req.body.avatar,
+        profit: req.body.profit,
       }
 
       const user = await UserModel.create(data)
@@ -105,7 +105,7 @@ class UserController {
           $set: {
             username: req.body.username,
             email: req.body.email,
-            avatar: req.body.avatar,
+            profit: req.body.profit,
           },
         },
         { new: true },

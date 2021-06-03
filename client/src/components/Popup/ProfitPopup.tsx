@@ -27,7 +27,6 @@ const ProfitPopup: FC<ProfitPopupProps> = ({ setPopupVisible, changeProfit }) =>
     if (profit && !warning) {
       changeProfit(profit)
       closePopup()
-      // console.log(profit)
     } else {
       setWarning(true)
     }
@@ -46,7 +45,7 @@ const ProfitPopup: FC<ProfitPopupProps> = ({ setPopupVisible, changeProfit }) =>
       <div className="popup" onClick={popupOutsideClick} ref={popupBgRef}>
         <div className="popup__content">
           <div className="popup__header">
-            <span className="text-xs text_medium">Edit user</span>
+            <span className="text-xs text_medium">Edit profit</span>
             <button className="popup__btn_icon" aria-label="close" onClick={closePopup}>
               <CloseIco />
             </button>

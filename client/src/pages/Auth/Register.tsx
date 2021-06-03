@@ -49,7 +49,8 @@ const Register = () => {
       AuthApi.register(username, email, password).then((newUser) => {
         if (newUser) {
           AuthApi.login(username, password).then((user) => {
-            window.location.href = `/after-register/${user.token}`
+            localStorage.setItem('token', user.token)
+            window.location.href = `/after-register`
           })
         } else {
           window.location.href = '/404'

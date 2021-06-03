@@ -1,7 +1,6 @@
 import express from 'express'
 
 import { UserCtrl } from '../controllers/user.controller'
-import { ImageCtrl } from '../controllers/image.controller'
 
 import { userValidation } from '../validations/user.validation'
 

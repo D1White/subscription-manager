@@ -1,14 +1,13 @@
 import { useEffect, useRef, FC, useState } from 'react'
 import { Portal, PopupInput } from 'components'
+import { useRootStore } from 'store/RootStateContext'
 
 import { ReactComponent as CloseIco } from 'assets/ico/close.svg'
 import { PopupProps } from 'types/IPopup'
 
-interface ProfitPopupProps extends PopupProps {
-  changeProfit: Function
-}
+const ProfitPopup: FC<PopupProps> = ({ setPopupVisible }) => {
+  const { userStore } = useRootStore()
 
-const ProfitPopup: FC<ProfitPopupProps> = ({ setPopupVisible, changeProfit }) => {
   const popupBgRef = useRef<HTMLDivElement>(null)
   const [profit, setProfit] = useState(0)
   const [warning, setWarning] = useState(false)
@@ -25,7 +24,7 @@ const ProfitPopup: FC<ProfitPopupProps> = ({ setPopupVisible, changeProfit }) =>
 
   const submit = () => {
     if (profit && !warning) {
-      changeProfit(profit)
+      userStore.changeProfit(profit)
       closePopup()
     } else {
       setWarning(true)

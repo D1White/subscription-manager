@@ -9,7 +9,7 @@ export const UserApi = {
     return data
   },
   async changeProfit(id: string, profit: number): Promise<any> {
-    const { data } = await axios.patch(`/user/${id}`, {
+    const { data } = await axios.patch(`/user/${id}/profit`, {
       profit,
     })
 

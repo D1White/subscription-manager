@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { observer } from 'mobx-react-lite'
 
 import { SpendChart, ProfitPopup } from 'components'
 import { useRootStore } from 'store/RootStateContext'
@@ -33,7 +34,7 @@ const RightBar = () => {
         <div className="rightBar__user-block">
           <div className="user-block__info">
             <img src={avatar} alt="" className="user-block__avatar" />
-            <span>1White</span>
+            <span>{userStore.username}</span>
           </div>
           <div className="user-block__buttons">
             <button aria-label="edit" className="user-block__btn edit" />
@@ -60,9 +61,9 @@ const RightBar = () => {
         </div>
         <SpendChart percent={subscriptionStore.costsPercent} />
       </div>
-      {popupVisible && <ProfitPopup setPopupVisible={setPopupVisible} changeProfit={userStore.changeProfit} />}
+      {popupVisible && <ProfitPopup setPopupVisible={setPopupVisible} />}
     </>
   )
 }
 
-export default RightBar
+export default observer(RightBar)

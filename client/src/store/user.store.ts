@@ -1,21 +1,22 @@
-import { observable, action } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 import { UserApi } from 'api/userApi'
 
 export class UserStore {
-  @observable id: string
-  @observable username: string
-  @observable email: string
-  @observable profit: number = 1209
+  id: string
+  username: string
+  email: string
+  profit: number = 0
 
-  @action
+  constructor() {
+    makeAutoObservable(this)
+  }
+
   changeProfit = (profit: number) => {
-    this.profit = profit
     UserApi.changeProfit(this.id, profit).then((_) => {
       this.getUser()
     })
   }
 
-  @action
   getUser = () => {
     UserApi.getMe().then((user) => {
       this.id = user._id

@@ -1,28 +1,16 @@
-import { observable, action, computed } from 'mobx'
+import { observable, action, computed, makeObservable } from 'mobx'
 import { getSubscriptionsMock } from 'services/api'
 import { ISubscription } from 'types/ISubscriptions'
 import { RootStateContextValue } from './RootStateContext'
 
 export class SubscriptionStore {
-  // rootStore
-  // profit = 0
-  // subscriptions
-  // constructor(rootStore: any) {
-  //   this.rootStore = rootStore
-  //   makeAutoObservable(this)
-  // }
-  // editProfit(profit: number) {
-  //   this.profit = profit
-  // }
-
-  // @observable profit: number = 1209
   @observable subscriptions: ISubscription[] = []
   private rootStore: RootStateContextValue
 
   constructor(rootStore: RootStateContextValue) {
+    makeObservable(this)
     this.rootStore = rootStore
     this.loadubscr()
-    // console.log(rootStore)
   }
 
   @action

@@ -8,29 +8,16 @@ import { ReactComponent as Lines1 } from 'assets/img/lines-1.svg'
 import { ReactComponent as Lines2 } from 'assets/img/lines-2.svg'
 import { ReactComponent as Bubble } from 'assets/img/bubble.svg'
 
-const Register = () => {
-  const [username, setUsername] = useState('')
+const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [warning, setWarning] = useState({
-    username: false,
     email: false,
     password: false,
   })
 
   useEffect(() => {
-    if (username && (username.length < 3 || username.length > 20)) {
-      setWarning({ ...warning, username: true })
-    } else {
-      setWarning({ ...warning, username: false })
-    }
-  }, [username]) // eslint-disable-line
-
-  useEffect(() => {
-    const REGEXP =
-      /^([A-Z|a-z|0-9](\.|_){0,1})+[A-Z|a-z|0-9]\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/gm // eslint-disable-line
-
-    if (email && (email.length < 3 || email.length > 50 || !REGEXP.test(email))) {
+    if (email && (email.length < 3 || email.length > 50)) {
       setWarning({ ...warning, email: true })
     } else {
       setWarning({ ...warning, email: false })
@@ -46,13 +33,11 @@ const Register = () => {
   }, [password]) // eslint-disable-line
 
   const submit = () => {
-    if (!warning.username && !warning.email && !warning.password && username && email && password) {
-      AuthApi.register(username, email, password)
-        .then((newUser) => {
-          AuthApi.login(username, password).then((user) => {
-            localStorage.setItem('token', user.token)
-            window.location.href = '/'
-          })
+    if (!warning.email && !warning.password && email && password) {
+      AuthApi.login(email, password)
+        .then((user) => {
+          localStorage.setItem('token', user.token)
+          window.location.href = '/'
         })
         .catch((_) => {
           window.location.href = '/404'
@@ -63,19 +48,18 @@ const Register = () => {
   return (
     <div className="auth-page">
       <div className="auth-page__main">
-        <h1 className="auth-page__title">Create an account</h1>
+        <h1 className="auth-page__title">Login</h1>
 
-        <AuthInput title="Username" warning={warning.username} setText={setUsername} />
-        <AuthInput title="Email" type="email" warning={warning.email} setText={setEmail} />
+        <AuthInput title="Email or username" warning={warning.email} setText={setEmail} />
         <AuthInput title="Password" type="password" warning={warning.password} setText={setPassword} />
 
         <button className="auth-page__btn" onClick={submit}>
-          Sign up
+          Sign in
         </button>
         <div className="auth-page__text-block">
-          <span className="auth-page__text">Already have an accaunt?&nbsp;</span>
-          <Link to="/login" className="auth-page__link">
-            Sign in
+          <span className="auth-page__text">No account?&nbsp;</span>
+          <Link to="/register" className="auth-page__link">
+            Sign up
           </Link>
         </div>
       </div>
@@ -95,4 +79,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Login

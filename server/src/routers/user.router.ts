@@ -2,7 +2,7 @@ import express from 'express'
 
 import { UserCtrl } from '../controllers/user.controller'
 
-import { userValidation } from '../validations/user.validation'
+import { userValidation, profitValidation } from '../validations/user.validation'
 
 import { passport } from '../core/passport'
 
@@ -15,6 +15,13 @@ usersRouter.patch(
   userValidation,
   passport.authenticate('jwt', { session: false }),
   UserCtrl.update,
+)
+
+usersRouter.patch(
+  '/:id/profit',
+  profitValidation,
+  passport.authenticate('jwt', { session: false }),
+  UserCtrl.changeProfit,
 )
 
 usersRouter.delete('/:id', passport.authenticate('jwt', { session: false }), UserCtrl.delete)

@@ -23,3 +23,11 @@ export const userValidation = [
     })
     .withMessage('The allowed number of characters in a password is from 3 to 50'),
 ]
+
+export const profitValidation = [
+  body('profit', 'Enter profit')
+    .isInt({
+      min: 0,
+    })
+    .withMessage('The allowed number of characters in a password is from 3 to 50'),
+]

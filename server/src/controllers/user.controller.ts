@@ -28,9 +28,7 @@ class UserController {
       //   .select('-user_id -__v')
       //   .exec()
 
-      res.json({
-        user,
-      })
+      res.json(user)
     } catch (err) {
       errorResponse(res, err)
     }
@@ -105,6 +103,46 @@ class UserController {
           $set: {
             username: req.body.username,
             email: req.body.email,
+            profit: req.body.profit,
+          },
+        },
+        { new: true },
+      ).exec()
+
+      res.json(user)
+    } catch (err) {
+      errorResponse(res, err)
+    }
+  }
+
+  async changeProfit(req: IUserRequest, res: Response) {
+    try {
+      const errors = validationResult(req)
+      if (!errors.isEmpty()) {
+        res.status(400).json({
+          errors: errors.array(),
+        })
+        return
+      }
+
+      const userId = req.params.id
+      if (!isValidObjectId(userId)) {
+        res.status(404).send()
+        return
+      }
+
+      const headerUser = req.user.toJSON()
+      if (JSON.stringify(userId) !== JSON.stringify(headerUser._id)) {
+        res.status(401).json({
+          message: 'Not enough rights!',
+        })
+        return
+      }
+
+      const user = await UserModel.findByIdAndUpdate(
+        userId,
+        {
+          $set: {
             profit: req.body.profit,
           },
         },

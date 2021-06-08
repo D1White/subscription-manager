@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { observer } from 'mobx-react-lite'
+import { toJS } from 'mobx'
+
 import { Subscription } from 'components'
+import { useRootStore } from 'store/RootStateContext'
 import { ReactComponent as PlusIco } from 'assets/ico/plus.svg'
-import mockSubscr from 'assets/subscriptions.json'
 
 const LeftBar = () => {
+  const { subscriptionStore } = useRootStore()
+  const { subscriptions } = subscriptionStore
+
+  useEffect(() => {
+    console.log(toJS(subscriptions))
+  }, [subscriptions])
+
   return (
     <div className="left-bar">
       <div className="left-bar__header">
@@ -31,19 +41,20 @@ const LeftBar = () => {
         </div>
         <hr className="table__border" />
         <div className="table__container">
-          {mockSubscr.map((subscr, index) => (
-            <Subscription
-              name={subscr.name}
-              price={subscr.price}
-              payment_day={subscr.payment_day}
-              color={subscr.color}
-              key={index}
-            />
-          ))}
+          {subscriptions &&
+            subscriptions.map((subscr, index) => (
+              <Subscription
+                name={subscr.name}
+                price={subscr.price}
+                payment_day={subscr.payment_day}
+                color={subscr.color}
+                key={index}
+              />
+            ))}
         </div>
       </div>
     </div>
   )
 }
 
-export default LeftBar
+export default observer(LeftBar)

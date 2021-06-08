@@ -14,9 +14,7 @@ class SubscriptionController {
 
       const subscr = await SubscriptionModel.find({ user_id: user._id }).exec()
 
-      res.json({
-        data: subscr,
-      })
+      res.json(subscr)
     } catch (err) {
       errorResponse(res, err)
     }

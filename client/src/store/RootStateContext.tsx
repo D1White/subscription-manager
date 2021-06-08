@@ -1,7 +1,12 @@
 import { createContext, FC, PropsWithChildren, useContext } from 'react'
+import { configure } from 'mobx'
 
 import { SubscriptionStore } from './subscription.store'
 import { UserStore } from './user.store'
+
+configure({
+  enforceActions: 'never',
+})
 
 export type RootStateContextValue = {
   subscriptionStore: SubscriptionStore

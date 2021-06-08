@@ -15,8 +15,8 @@ app.use(cors())
 app.use(express.json())
 app.use(passport.initialize())
 
-app.use('/api/subscription', subscriptionRouter)
-app.use('/api/user', usersRouter)
+app.use('/api/subscriptions', subscriptionRouter)
+app.use('/api/users', usersRouter)
 app.use('/api', authRouter)
 
 app.listen(process.env.PORT, () => {

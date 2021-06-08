@@ -1,5 +1,6 @@
 import { observable, action, computed, makeObservable } from 'mobx'
-import { getSubscriptionsMock } from 'services/api'
+
+import { SubscriptionApi } from 'api/subscriptionApi'
 import { ISubscription } from 'types/ISubscriptions'
 import { RootStateContextValue } from './RootStateContext'
 
@@ -15,7 +16,9 @@ export class SubscriptionStore {
 
   @action
   loadubscr = () => {
-    this.subscriptions = getSubscriptionsMock()
+    SubscriptionApi.getSubscriptions().then((subscriptions) => {
+      this.subscriptions = subscriptions
+    })
   }
 
   @computed get cost(): number {

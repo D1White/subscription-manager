@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { observer } from 'mobx-react-lite'
+import { useHistory } from 'react-router-dom'
 
-import { SpendChart, ProfitPopup } from 'components'
+import { SpendChart, ProfitPopup, UserPopup } from 'components'
 import { useRootStore } from 'store/RootStateContext'
 
 import { ReactComponent as EditIco } from 'assets/ico/edit-2.svg'
@@ -9,11 +10,16 @@ import { ReactComponent as EditIco } from 'assets/ico/edit-2.svg'
 import avatar from '../../assets/img/avatar.png'
 
 const RightBar = () => {
+  const history = useHistory()
   const { subscriptionStore, userStore } = useRootStore()
 
-  const [popupVisible, setPopupVisible] = useState(false)
+  const [profitPopupVisible, setProfitPopupVisible] = useState(false)
+  const [userPopupVisible, setUserPopupVisible] = useState(false)
 
   const formatProfit = (profit: number) => {
+    if (!profit) {
+      return 0
+    }
     return profit
       .toFixed(2)
       .replace(/(\d)(?=(\d{3})+\.)/g, '$& ')
@@ -24,8 +30,17 @@ const RightBar = () => {
     return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$& ')
   }
 
-  const showPopup = () => {
-    setPopupVisible(true)
+  const showProfitPopup = () => {
+    setProfitPopupVisible(true)
+  }
+
+  const showUserPopup = () => {
+    setUserPopupVisible(true)
+  }
+
+  const logout = () => {
+    localStorage.removeItem('token')
+    history.push('/login')
   }
 
   return (
@@ -37,8 +52,8 @@ const RightBar = () => {
             <span>{userStore.username}</span>
           </div>
           <div className="user-block__buttons">
-            <button aria-label="edit" className="user-block__btn edit" />
-            <button aria-label="logout" className="user-block__btn logout" />
+            <button aria-label="edit" className="user-block__btn edit" onClick={showUserPopup} />
+            <button aria-label="logout" className="user-block__btn logout" onClick={logout} />
           </div>
         </div>
         <div className="rightBar__info">
@@ -46,7 +61,7 @@ const RightBar = () => {
             <span className="text-s text_medium">Your Profit</span>
             <div className="info-block__profit">
               <span className="text-xl bold">{formatProfit(userStore.profit)}</span>
-              <button className="info-block__btn" onClick={showPopup}>
+              <button className="info-block__btn" onClick={showProfitPopup}>
                 <EditIco />
               </button>
             </div>
@@ -61,7 +76,8 @@ const RightBar = () => {
         </div>
         <SpendChart percent={subscriptionStore.costsPercent} />
       </div>
-      {popupVisible && <ProfitPopup setPopupVisible={setPopupVisible} />}
+      {profitPopupVisible && <ProfitPopup setPopupVisible={setProfitPopupVisible} />}
+      {userPopupVisible && <UserPopup setPopupVisible={setUserPopupVisible} />}
     </>
   )
 }

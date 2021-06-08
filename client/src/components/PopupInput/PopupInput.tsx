@@ -6,13 +6,13 @@ interface PopupInputProps {
   warning: boolean
   warning_text?: string
   type?: string
-  setText?: Dispatch<number>
+  setText: Dispatch<string>
 }
 
 const PopupInput: FC<PopupInputProps> = ({ title, warning, warning_text, type = 'text', setText }) => {
   const debounced = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setText && setText(parseFloat(e.target.value))
-  }, 500)
+    setText(e.target.value)
+  }, 300)
 
   return (
     <div className="popup-input">

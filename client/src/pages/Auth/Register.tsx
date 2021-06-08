@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import { AuthInput } from 'components'
-import { AuthApi } from 'api/authApi'
+import { AuthApi } from 'api/auth.api'
+import checkWarnings from 'services/checkWarnings'
 
 import { ReactComponent as Lines1 } from 'assets/img/lines-1.svg'
 import { ReactComponent as Lines2 } from 'assets/img/lines-2.svg'
@@ -46,7 +47,7 @@ const Register = () => {
   }, [password]) // eslint-disable-line
 
   const submit = () => {
-    if (!warning.username && !warning.email && !warning.password && username && email && password) {
+    if (!checkWarnings(warning) && username && email && password) {
       AuthApi.register(username, email, password)
         .then((newUser) => {
           AuthApi.login(username, password).then((user) => {

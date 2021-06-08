@@ -10,3 +10,7 @@ export type ISubscription = {
   payment_day: number
   color: string
 }
+
+export interface ISubscriptionDB extends ISubscription {
+  _id: string
+}

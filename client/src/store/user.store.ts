@@ -1,11 +1,11 @@
 import { makeAutoObservable } from 'mobx'
-import { UserApi } from 'api/userApi'
+import { UserApi } from 'api/user.api'
 
 export class UserStore {
   id: string
   username: string
   email: string
-  profit: number = 0
+  profit: number
 
   constructor() {
     makeAutoObservable(this)
@@ -23,6 +23,12 @@ export class UserStore {
       this.username = user.username
       this.email = user.email
       this.profit = user.profit
+    })
+  }
+
+  updateUser = (username: string, email: string, password: string) => {
+    UserApi.updateUser(this.id, username, email, password).then((_) => {
+      this.getUser()
     })
   }
 }

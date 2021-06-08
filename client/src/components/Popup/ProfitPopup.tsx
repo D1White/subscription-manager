@@ -9,7 +9,8 @@ const ProfitPopup: FC<PopupProps> = ({ setPopupVisible }) => {
   const { userStore } = useRootStore()
 
   const popupBgRef = useRef<HTMLDivElement>(null)
-  const [profit, setProfit] = useState(0)
+  const [profit, setProfit] = useState('0')
+  const [profitNumber, setProfitNumber] = useState(0)
   const [warning, setWarning] = useState(false)
 
   const closePopup = () => {
@@ -24,7 +25,7 @@ const ProfitPopup: FC<PopupProps> = ({ setPopupVisible }) => {
 
   const submit = () => {
     if (profit && !warning) {
-      userStore.changeProfit(profit)
+      userStore.changeProfit(profitNumber)
       closePopup()
     } else {
       setWarning(true)
@@ -32,12 +33,16 @@ const ProfitPopup: FC<PopupProps> = ({ setPopupVisible }) => {
   }
 
   useEffect(() => {
-    if (profit && profit < 1) {
+    setProfitNumber(parseFloat(profit))
+  }, [profit])
+
+  useEffect(() => {
+    if (profitNumber && profitNumber < 1) {
       setWarning(true)
     } else {
       setWarning(false)
     }
-  }, [profit])
+  }, [profitNumber])
 
   return (
     <Portal>

@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import { AuthInput } from 'components'
-import { AuthApi } from 'api/authApi'
+import { AuthApi } from 'api/auth.api'
+import checkWarnings from 'services/checkWarnings'
 
 import { ReactComponent as Lines1 } from 'assets/img/lines-1.svg'
 import { ReactComponent as Lines2 } from 'assets/img/lines-2.svg'
@@ -33,7 +34,7 @@ const Login = () => {
   }, [password]) // eslint-disable-line
 
   const submit = () => {
-    if (!warning.email && !warning.password && email && password) {
+    if (!checkWarnings(warning) && email && password) {
       AuthApi.login(email, password)
         .then((user) => {
           localStorage.setItem('token', user.token)

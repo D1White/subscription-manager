@@ -1,14 +1,28 @@
-import React, { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { toJS } from 'mobx'
 
-import { Subscription } from 'components'
+import { Subscription, SubscriptionFields } from 'components'
 import { useRootStore } from 'store/RootStateContext'
 import { ReactComponent as PlusIco } from 'assets/ico/plus.svg'
 
 const LeftBar = () => {
   const { subscriptionStore } = useRootStore()
-  const { subscriptions } = subscriptionStore
+  const { subscriptions, loadSubscr } = subscriptionStore
+
+  const [fieldsVisible, setFieldsVisible] = useState(false)
+
+  const showFields = () => {
+    setFieldsVisible(true)
+  }
+
+  const hideFields = () => {
+    setFieldsVisible(false)
+  }
+
+  useEffect(() => {
+    loadSubscr()
+  }, []) //eslint-disable-line
 
   useEffect(() => {
     console.log(toJS(subscriptions))
@@ -18,7 +32,7 @@ const LeftBar = () => {
     <div className="left-bar">
       <div className="left-bar__header">
         <span className="text-m text_medium">Subscriptions:</span>
-        <button className="header__btn">
+        <button className="header__btn" onClick={showFields}>
           <PlusIco />
           <span>add</span>
         </button>
@@ -41,16 +55,21 @@ const LeftBar = () => {
         </div>
         <hr className="table__border" />
         <div className="table__container">
+          {fieldsVisible && <SubscriptionFields hide={hideFields} />}
           {subscriptions &&
-            subscriptions.map((subscr, index) => (
-              <Subscription
-                name={subscr.name}
-                price={subscr.price}
-                payment_day={subscr.payment_day}
-                color={subscr.color}
-                key={index}
-              />
-            ))}
+            subscriptions
+              .slice()
+              .reverse()
+              .map((subscr, index) => (
+                <Subscription
+                  id={subscr._id}
+                  name={subscr.name}
+                  price={subscr.price}
+                  payment_day={subscr.payment_day}
+                  color={subscr.color}
+                  key={index}
+                />
+              ))}
         </div>
       </div>
     </div>

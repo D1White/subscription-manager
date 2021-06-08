@@ -83,7 +83,6 @@ class SubscriptionController {
             price: req.body.price,
             payment_day: req.body.payment_day,
             color: req.body.color,
-            icon: req.body.icon,
           },
         },
         (err) => {

@@ -22,6 +22,12 @@ export const userValidation = [
       max: 50,
     })
     .withMessage('The allowed number of characters in a password is from 3 to 50'),
+  body('profit', 'Enter profit')
+    .optional()
+    .isInt({
+      min: 0,
+    })
+    .withMessage('The allowed number of characters in a password is from 3 to 50'),
 ]
 
 export const profitValidation = [

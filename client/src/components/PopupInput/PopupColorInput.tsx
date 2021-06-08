@@ -1,11 +1,18 @@
-import { FC, useState } from 'react'
+import { Dispatch, FC, useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
+import { useDebouncedCallback } from 'use-debounce'
+
 import Popover from 'components/HOCs/Popover'
+import colorTone from 'services/colorTone'
 import { ReactComponent as ColorIco } from 'assets/ico/color-lens.svg'
 
-const PopupColorInput: FC = () => {
+interface PopupColorInputProps {
+  color: string
+  setColor: Dispatch<string>
+}
+
+const PopupColorInput: FC<PopupColorInputProps> = ({ color, setColor }) => {
   const [popoverOpen, setPopoverOpen] = useState(false)
-  const [color, setColor] = useState('#f5f7f9')
 
   const [referenceRef, setReferenceRef] = useState<HTMLButtonElement | null>(null)
 
@@ -17,9 +24,9 @@ const PopupColorInput: FC = () => {
     setPopoverOpen(false)
   }
 
-  const changeColor = (e: string) => {
-    setColor(e)
-  }
+  const debounced = useDebouncedCallback((color: string) => {
+    setColor(color)
+  }, 300)
 
   return (
     <div className="popup-color-input">
@@ -30,15 +37,11 @@ const PopupColorInput: FC = () => {
         onClick={openPopover}
         ref={setReferenceRef}
       >
-        <ColorIco
-          className={`popup-color-input__ico ${
-            parseInt(color.slice(1), 16) < 8388607 ? 'popup-color-input__ico_light' : ''
-          }`}
-        />
+        <ColorIco className={`popup-color-input__ico ${colorTone(color) ? 'icon_light' : ''}`} />
       </button>
       {popoverOpen && (
         <Popover reference={referenceRef} onClose={closePopover}>
-          <HexColorPicker color={color} onChange={changeColor} />
+          <HexColorPicker color={color} onChange={debounced} />
         </Popover>
       )}
     </div>

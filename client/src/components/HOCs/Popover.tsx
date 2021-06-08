@@ -21,8 +21,8 @@ const Popover: FC<PopoverProps> = ({ onClose, reference, children }) => {
   const refBounding = reference?.getBoundingClientRect()
 
   const style = {
-    top: refBounding ? refBounding.top + refBounding.height : 0,
-    left: refBounding ? refBounding.left - refBounding.width / 2 : 0,
+    top: refBounding ? refBounding.top + refBounding.height + 15 : 0,
+    left: refBounding ? refBounding.left - refBounding.width * 1.25 : 0,
   }
 
   return (

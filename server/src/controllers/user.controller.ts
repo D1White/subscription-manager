@@ -100,11 +100,7 @@ class UserController {
       const user = await UserModel.findByIdAndUpdate(
         userId,
         {
-          $set: {
-            username: req.body.username,
-            email: req.body.email,
-            profit: req.body.profit,
-          },
+          $set: req.body,
         },
         { new: true },
       ).exec()

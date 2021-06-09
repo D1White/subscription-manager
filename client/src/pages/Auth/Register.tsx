@@ -25,7 +25,7 @@ const Register = () => {
     } else {
       setWarning({ ...warning, username: false })
     }
-  }, [username]) // eslint-disable-line
+  }, [username])
 
   useEffect(() => {
     const REGEXP =
@@ -36,7 +36,7 @@ const Register = () => {
     } else {
       setWarning({ ...warning, email: false })
     }
-  }, [email]) // eslint-disable-line
+  }, [email])
 
   useEffect(() => {
     if (password && (password.length < 3 || password.length > 50)) {
@@ -44,7 +44,7 @@ const Register = () => {
     } else {
       setWarning({ ...warning, password: false })
     }
-  }, [password]) // eslint-disable-line
+  }, [password])
 
   const submit = () => {
     if (!checkWarnings(warning) && username && email && password) {

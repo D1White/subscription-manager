@@ -11,13 +11,13 @@ const Main = observer(() => {
 
   useEffect(() => {
     userStore.getUser()
-  }, []) // eslint-disable-line
+  }, [])
 
   useEffect(() => {
     if (userStore.id && userStore.profit === 0) {
       setProfitPopupVisible(true)
     }
-  }, [userStore.id, userStore.profit]) // eslint-disable-line
+  }, [userStore.id, userStore.profit])
 
   return (
     <>

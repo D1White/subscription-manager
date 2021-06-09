@@ -16,7 +16,7 @@ export const useOutsideHook = (ref: HTMLDivElement | null) => {
     return () => {
       document.removeEventListener('click', handleClickOutside)
     }
-  }, [ref]) // eslint-disable-line
+  }, [ref])
 
   return outsideClick
 }

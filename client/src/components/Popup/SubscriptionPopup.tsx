@@ -43,7 +43,7 @@ const SubscriptionPopup: FC<SubscriptionPopupProps> = ({ setPopupVisible, id }) 
     } else {
       setWarning({ ...warning, service: false })
     }
-  }, [service]) // eslint-disable-line
+  }, [service])
 
   useEffect(() => {
     const priceFloat = parseFloat(price)
@@ -53,7 +53,7 @@ const SubscriptionPopup: FC<SubscriptionPopupProps> = ({ setPopupVisible, id }) 
     } else {
       setWarning({ ...warning, price: false })
     }
-  }, [price]) // eslint-disable-line
+  }, [price])
 
   useEffect(() => {
     const paymentDayInt = parseInt(paymentDay)
@@ -63,7 +63,7 @@ const SubscriptionPopup: FC<SubscriptionPopupProps> = ({ setPopupVisible, id }) 
     } else {
       setWarning({ ...warning, paymentDay: false })
     }
-  }, [paymentDay]) // eslint-disable-line
+  }, [paymentDay])
 
   const submit = () => {
     const priceFloat = parseFloat(price)

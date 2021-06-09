@@ -13,7 +13,7 @@ const Portal: FC<PortalProps> = ({ children }) => {
     return () => {
       document.body.removeChild(container)
     }
-  }, []) // eslint-disable-line
+  }, [])
 
   return ReactDOM.createPortal(children, container)
 }

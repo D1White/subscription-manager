@@ -47,7 +47,7 @@ const UserPopup: FC<PopupProps> = ({ setPopupVisible }) => {
     } else {
       setWarning({ ...warning, username: false })
     }
-  }, [username]) // eslint-disable-line
+  }, [username])
 
   useEffect(() => {
     const REGEXP =
@@ -58,7 +58,7 @@ const UserPopup: FC<PopupProps> = ({ setPopupVisible }) => {
     } else {
       setWarning({ ...warning, email: false })
     }
-  }, [email]) // eslint-disable-line
+  }, [email])
 
   useEffect(() => {
     if (password && (password.length < 3 || password.length > 50)) {
@@ -66,7 +66,7 @@ const UserPopup: FC<PopupProps> = ({ setPopupVisible }) => {
     } else {
       setWarning({ ...warning, password: false })
     }
-  }, [password]) // eslint-disable-line
+  }, [password])
 
   useEffect(() => {
     if (password && password2 && password !== password2) {
@@ -74,7 +74,7 @@ const UserPopup: FC<PopupProps> = ({ setPopupVisible }) => {
     } else {
       setWarning({ ...warning, password2: false })
     }
-  }, [password, password2]) // eslint-disable-line
+  }, [password, password2])
 
   return (
     <Portal>

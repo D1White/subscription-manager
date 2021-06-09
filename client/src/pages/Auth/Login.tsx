@@ -23,7 +23,7 @@ const Login = () => {
     } else {
       setWarning({ ...warning, email: false })
     }
-  }, [email]) // eslint-disable-line
+  }, [email])
 
   useEffect(() => {
     if (password && (password.length < 3 || password.length > 50)) {
@@ -31,7 +31,7 @@ const Login = () => {
     } else {
       setWarning({ ...warning, password: false })
     }
-  }, [password]) // eslint-disable-line
+  }, [password])
 
   const submit = () => {
     if (!checkWarnings(warning) && email && password) {

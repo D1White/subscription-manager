@@ -16,7 +16,7 @@ const Popover: FC<PopoverProps> = ({ onClose, reference, children }) => {
       onClose()
     }
     console.log('outsideClick: ', outsideClick)
-  }, [outsideClick]) // eslint-disable-line
+  }, [outsideClick])
 
   const refBounding = reference?.getBoundingClientRect()
 

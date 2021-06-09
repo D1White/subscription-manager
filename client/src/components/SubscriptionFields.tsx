@@ -65,7 +65,7 @@ const SubscriptionFields: FC<SubscriptionFieldsProps> = ({ hide }) => {
     } else {
       setWarning({ ...warning, service: false })
     }
-  }, [service]) // eslint-disable-line
+  }, [service])
 
   useEffect(() => {
     if (price < 0) {
@@ -73,7 +73,7 @@ const SubscriptionFields: FC<SubscriptionFieldsProps> = ({ hide }) => {
     } else {
       setWarning({ ...warning, price: false })
     }
-  }, [price]) // eslint-disable-line
+  }, [price])
 
   useEffect(() => {
     if (paymentDay < 1 && paymentDay > 31) {
@@ -81,7 +81,7 @@ const SubscriptionFields: FC<SubscriptionFieldsProps> = ({ hide }) => {
     } else {
       setWarning({ ...warning, paymentDay: false })
     }
-  }, [paymentDay]) // eslint-disable-line
+  }, [paymentDay])
 
   const submit = () => {
     if (!checkWarnings(warning) && service && price && paymentDay) {

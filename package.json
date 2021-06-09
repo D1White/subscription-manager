@@ -1,0 +1,20 @@
+{
+  "name": "subscription_manager",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start-server": "npm run dev --prefix ./server",
+    "start-client": "yarn start --prefix ./client",
+    "install-server": "npm install --prefix ./server",
+    "install-client": "yarn install --prefix ./client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/D1White/subscription-manager.git"
+  },
+  "author": "Danylo Bilyi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/D1White/subscription-manager/issues"
+  }
+}

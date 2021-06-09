@@ -16,6 +16,8 @@
     border-radius: 30px
     display: flex
     flex-direction: column
+    +sm
+      width: 90%
 
   &__header
     display: flex
@@ -37,6 +39,9 @@
     color: $white
 
     transition: background-color .2s
+
+    +sm
+      width: 100%
 
     &:hover
       background-color: lighten($dark_light, 5)

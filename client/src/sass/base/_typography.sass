@@ -1,20 +1,64 @@
 .text
   &-xs
     font-size: 18px
+    +lg
+      font-size: 16px
+    +md
+      font-size: 18px
+    +sm
+      font-size: 14px
+    +xs
+      font-size: 12px
   &-s
     font-size: 20px
+    +lg
+      font-size: 18px
+    +md
+      font-size: 20px
+    +sm
+      font-size: 16px
+    +xs
+      font-size: 14px
   &-m
     font-size: 24px
+    +lg
+      font-size: 22px
+    +md
+      font-size: 24px
+    +sm
+      font-size: 20px
+    +xs
+      font-size: 18px
   &-l
     font-size: 28px
+    +lg
+      font-size: 26px
+    +md
+      font-size: 28px
+    +sm
+      font-size: 24px
+    +xs
+      font-size: 22px
   &-xl
     font-size: 48px
+    +lg
+      font-size: 36px
+    +md
+      font-size: 48px
+    +sm
+      font-size: 32px
+    +xs
+      font-size: 48px
   &_medium
     font-weight: 500
   &_bold
     font-weight: 700
   &_center
     text-align: center
+  &-overflow
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
 
 .medium
   font-weight: 500
@@ -27,6 +71,12 @@
 =text-xs
   +text
   font-size: 18px
+  +lg
+    font-size: 16px
+  +md
+    font-size: 18px
+  +sm
+    font-size: 16px
 =text-s
   +text
   font-size: 20px

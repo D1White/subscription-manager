@@ -12,6 +12,7 @@ $circle-radius: 90
   border-radius: 33px
   background-color: #EEEEEE
   box-shadow: inset -1px -1px 5px rgba(174, 174, 192, 0.4), inset 1.5px 1.5px 5px rgba(255, 255, 255, 0.7)
+  min-width: 261px
 
   &__container
     padding: 40px 50px
@@ -22,10 +23,15 @@ $circle-radius: 90
     flex-direction: column
     justify-content: space-between
     align-items: center
+    +lg
+      padding: 20px 50px
 
   &__text
     font-size: 18px
     margin-bottom: 40px
+    text-align: center
+    +lg
+      margin-bottom: 20px
 
   &__chart
     width: $circle-size

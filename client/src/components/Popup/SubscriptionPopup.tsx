@@ -8,10 +8,11 @@ import { ReactComponent as CloseIco } from 'assets/ico/close.svg'
 import { PopupProps } from 'types/IPopup'
 
 interface SubscriptionPopupProps extends PopupProps {
-  id: string
+  id?: string
+  roleCreate?: boolean
 }
 
-const SubscriptionPopup: FC<SubscriptionPopupProps> = ({ setPopupVisible, id }) => {
+const SubscriptionPopup: FC<SubscriptionPopupProps> = ({ setPopupVisible, id, roleCreate }) => {
   const { subscriptionStore } = useRootStore()
 
   const popupRef = useRef<HTMLDivElement>(null)
@@ -70,12 +71,21 @@ const SubscriptionPopup: FC<SubscriptionPopupProps> = ({ setPopupVisible, id }) 
     const paymentDayInt = parseInt(paymentDay)
 
     if (!checkWarnings(warning) && service && priceFloat && paymentDayInt) {
-      subscriptionStore.update(id, {
-        name: service,
-        price: priceFloat,
-        payment_day: paymentDayInt,
-        color: color,
-      })
+      if (!roleCreate && id) {
+        subscriptionStore.update(id, {
+          name: service,
+          price: priceFloat,
+          payment_day: paymentDayInt,
+          color: color,
+        })
+      } else {
+        subscriptionStore.create({
+          name: service,
+          price: priceFloat,
+          payment_day: paymentDayInt,
+          color: color,
+        })
+      }
       setPopupVisible(false)
     }
   }
@@ -85,7 +95,7 @@ const SubscriptionPopup: FC<SubscriptionPopupProps> = ({ setPopupVisible, id }) 
       <div className="popup" onClick={popupOutsideClick} ref={popupBgRef}>
         <div className="popup__content" ref={popupRef}>
           <div className="popup__header">
-            <span className="text-xs text_medium">Edit subscription</span>
+            <span className="text-xs text_medium">{`${roleCreate ? 'Create' : 'Edit'} subscription`}</span>
             <button className="popup__btn_icon" aria-label="close" onClick={closePopup}>
               <CloseIco />
             </button>
@@ -114,7 +124,7 @@ const SubscriptionPopup: FC<SubscriptionPopupProps> = ({ setPopupVisible, id }) 
           />
 
           <button className="popup__btn" onClick={submit}>
-            Save
+            {roleCreate ? 'Create' : 'Save'}
           </button>
         </div>
       </div>

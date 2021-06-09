@@ -1,0 +1,37 @@
+=r($width)
+  @media only screen and (max-width: $width+ "px")
+    @content
+
+=xxl
+  +r(2559)
+    @content
+
+=xl
+  +r(1919)
+    @content
+
+=lg
+  +r(1439)
+    @content
+
+=ipadPro
+  +r(1439)
+    +rhmin(1340)
+      @content
+
+=md
+  +r(1023)
+    @content
+
+=ipad
+  +r(769)
+    +rhmin(1000)
+      @content
+
+=sm
+  +r(767)
+    @content
+
+=xs
+  +r(599)
+    @content

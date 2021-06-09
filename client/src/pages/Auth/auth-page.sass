@@ -9,15 +9,28 @@
     flex-direction: column
     align-items: center
     justify-content: center
+    +lg
+      width: 45%
+    +md
+      width: 100%
+    +sm
+      padding: 0 15px
 
   &__poster
     width: 65%
     background-color: $purple_dark
+    +lg
+      width: 55%
+    +md
+      display: none
 
   &__title
     font-size: 48px
     +text-medium
     margin-bottom: 40px
+    +sm
+      font-size: 32px
+      text-align: center
 
   &__text-block
     display: flex
@@ -46,6 +59,9 @@
 
     transition: background-color .2s
 
+    +sm
+      width: 100%
+
     &:hover
       background-color: $purple
 
@@ -57,6 +73,7 @@
     width: 100%
     height: 80%
     position: relative
+    overflow: hidden
 
   &__lines,
     position: absolute
@@ -65,6 +82,8 @@
     z-index: 1
     &_bottom
       z-index: 3
+      +xl
+        z-index: 1
 
   &__bubble
     position: absolute
@@ -80,3 +99,12 @@
     font-weight: 500
     color: $white
     text-align: center
+    +lg
+      font-size: 42px
+
+.poster__bubble
+  +lg
+    width: 100%
+    height: auto
+    top: 10%
+    left: 0

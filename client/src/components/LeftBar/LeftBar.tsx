@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { toJS } from 'mobx'
 
-import { Subscription, SubscriptionFields } from 'components'
+import { Subscription, SubscriptionFields, SubscriptionPopup } from 'components'
 import { useRootStore } from 'store/RootStateContext'
 import { ReactComponent as PlusIco } from 'assets/ico/plus.svg'
 
@@ -50,12 +50,17 @@ const LeftBar = () => {
             </span>
           </div>
           <div className="table__cell table__cell_center">
-            <span className="text-s">payment day:</span>
+            <span className="text-s text_center">payment day:</span>
           </div>
         </div>
         <hr className="table__border" />
         <div className="table__container">
-          {fieldsVisible && <SubscriptionFields hide={hideFields} />}
+          {fieldsVisible &&
+            (window.innerWidth > 767 ? (
+              <SubscriptionFields hide={hideFields} />
+            ) : (
+              <SubscriptionPopup roleCreate setPopupVisible={setFieldsVisible} />
+            ))}
           {subscriptions &&
             subscriptions
               .slice()

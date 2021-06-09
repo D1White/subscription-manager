@@ -1,3 +1,4 @@
+@import helpers/index
 @import base/index
 @import components
 @import pages
@@ -15,6 +16,10 @@ body
 #root
   height: 100vh
   display: flex
+  +md
+    height: auto
+    flex-direction: column-reverse
+    align-items: center
 
 .icon
   &_light>path

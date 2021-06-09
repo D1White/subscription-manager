@@ -1,0 +1,34 @@
+.error-page
+  width: 100%
+  height: 100vh
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+
+  &__puzzle
+    width: 60%
+    max-width: 600px
+    height: auto
+    animation: puzzle 3s infinite alternate
+
+  &__title
+    text-align: center
+    margin-bottom: 30px
+
+  &__link
+    background-color: $purple_light
+    padding: 15px 18px
+    border-radius: 15px
+    color: $white
+    text-decoration: none
+    transition: background-color .1s
+    &:hover
+      background-color: $purple
+
+@keyframes puzzle
+  0%
+    transform: rotate(-20deg)
+
+  100%
+    transform: rotate(30deg)

@@ -17,7 +17,7 @@ const Main = observer(() => {
     if (userStore.id && userStore.profit === 0) {
       setProfitPopupVisible(true)
     }
-  }, [userStore.id]) // eslint-disable-line
+  }, [userStore.id, userStore.profit]) // eslint-disable-line
 
   return (
     <>

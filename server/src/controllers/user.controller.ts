@@ -100,7 +100,11 @@ class UserController {
       const user = await UserModel.findByIdAndUpdate(
         userId,
         {
-          $set: req.body,
+          $set: {
+            username: req.body.username,
+            email: req.body.email,
+            password: generateMD5(req.body.password + process.env.SECRET_KEY),
+          },
         },
         { new: true },
       ).exec()

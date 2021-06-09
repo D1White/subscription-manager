@@ -13,4 +13,7 @@ export const SubscriptionApi = {
   async delete(id: string): Promise<any> {
     await axios.delete(`/subscriptions/${id}`)
   },
+  async update(id: string, postData: ISubscription): Promise<any> {
+    await axios.patch(`/subscriptions/${id}`, postData)
+  },
 }

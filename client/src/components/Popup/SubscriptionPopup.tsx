@@ -1,6 +1,7 @@
 import { useRef, FC, useState, useEffect } from 'react'
 
 import { Portal, PopupInput, PopupColorInput } from 'components'
+import { useRootStore } from 'store/RootStateContext'
 import checkWarnings from 'services/checkWarnings'
 
 import { ReactComponent as CloseIco } from 'assets/ico/close.svg'
@@ -11,6 +12,8 @@ interface SubscriptionPopupProps extends PopupProps {
 }
 
 const SubscriptionPopup: FC<SubscriptionPopupProps> = ({ setPopupVisible, id }) => {
+  const { subscriptionStore } = useRootStore()
+
   const popupRef = useRef<HTMLDivElement>(null)
   const popupBgRef = useRef<HTMLDivElement>(null)
 
@@ -67,7 +70,12 @@ const SubscriptionPopup: FC<SubscriptionPopupProps> = ({ setPopupVisible, id }) 
     const paymentDayInt = parseInt(paymentDay)
 
     if (!checkWarnings(warning) && service && priceFloat && paymentDayInt) {
-      // subscriptionStore.create({ name: service, price, payment_day: paymentDay, color })
+      subscriptionStore.update(id, {
+        name: service,
+        price: priceFloat,
+        payment_day: paymentDayInt,
+        color: color,
+      })
       setPopupVisible(false)
     }
   }
@@ -84,9 +92,26 @@ const SubscriptionPopup: FC<SubscriptionPopupProps> = ({ setPopupVisible, id }) 
           </div>
 
           <PopupColorInput color={color} setColor={setColor} />
-          <PopupInput title="Service name" warning={warning.service} setText={setService} />
-          <PopupInput type="number" title="Price (USD/month)" warning={warning.price} setText={setPrice} />
-          <PopupInput type="number" title="Payment day" warning={warning.paymentDay} setText={setPaymentDay} />
+          <PopupInput
+            title="Service name"
+            setText={setService}
+            warning={warning.service}
+            warning_text="Min 3 characters, max 20"
+          />
+          <PopupInput
+            type="number"
+            title="Price (USD/month)"
+            setText={setPrice}
+            warning={warning.price}
+            warning_text="More than zero"
+          />
+          <PopupInput
+            type="number"
+            title="Payment day"
+            setText={setPaymentDay}
+            warning={warning.paymentDay}
+            warning_text="Incorrect day"
+          />
 
           <button className="popup__btn" onClick={submit}>
             Save

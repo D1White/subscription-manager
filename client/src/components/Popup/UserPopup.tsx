@@ -87,10 +87,27 @@ const UserPopup: FC<PopupProps> = ({ setPopupVisible }) => {
             </button>
           </div>
 
-          <PopupInput title="Username" warning={warning.username} setText={setUsername} />
-          <PopupInput title="Email" warning={warning.email} setText={setEmail} />
-          <PopupInput title="Password" warning={warning.password} type="password" setText={setPassword} />
-          <PopupInput title="Repeat password" warning={warning.password2} type="password" setText={setPassword2} />
+          <PopupInput
+            title="Username"
+            setText={setUsername}
+            warning={warning.username}
+            warning_text="Min 3 characters, max 20"
+          />
+          <PopupInput title="Email" warning={warning.email} setText={setEmail} warning_text="Incorrect email" />
+          <PopupInput
+            title="Password"
+            warning={warning.password}
+            type="password"
+            setText={setPassword}
+            warning_text="Min 3 characters"
+          />
+          <PopupInput
+            title="Repeat password"
+            type="password"
+            setText={setPassword2}
+            warning={warning.password2}
+            warning_text="Password mismatch"
+          />
 
           <button className="popup__btn" onClick={submit}>
             Save

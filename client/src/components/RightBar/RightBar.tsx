@@ -27,7 +27,13 @@ const RightBar = () => {
   }
 
   const formatCost = (n: number) => {
-    return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$& ')
+    const result = n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$& ')
+
+    if (result.slice(-2) === '00') {
+      return result.slice(0, -3)
+    }
+
+    return result
   }
 
   const showProfitPopup = () => {
@@ -74,7 +80,7 @@ const RightBar = () => {
             <span className="text-xs">USD/month</span>
           </div>
         </div>
-        <SpendChart percent={subscriptionStore.costsPercent} />
+        <SpendChart percent={subscriptionStore.costsPercent || 0} />
       </div>
       {profitPopupVisible && <ProfitPopup setPopupVisible={setProfitPopupVisible} />}
       {userPopupVisible && <UserPopup setPopupVisible={setUserPopupVisible} />}

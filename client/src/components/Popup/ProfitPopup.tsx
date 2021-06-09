@@ -54,7 +54,13 @@ const ProfitPopup: FC<PopupProps> = ({ setPopupVisible }) => {
               <CloseIco />
             </button>
           </div>
-          <PopupInput title="Profit" type="number" warning={warning} setText={setProfit} />
+          <PopupInput
+            title="Profit"
+            type="number"
+            setText={setProfit}
+            warning={warning}
+            warning_text="More than zero"
+          />
           <button className="popup__btn" onClick={submit}>
             Save
           </button>

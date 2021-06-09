@@ -34,6 +34,13 @@ export class SubscriptionStore {
     })
   }
 
+  @action
+  update = (id: string, subscription: ISubscription) => {
+    SubscriptionApi.update(id, subscription).then((_) => {
+      this.loadSubscr()
+    })
+  }
+
   @computed get cost(): number {
     let cost = 0
 

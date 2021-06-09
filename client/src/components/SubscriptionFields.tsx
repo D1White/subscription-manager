@@ -111,7 +111,7 @@ const SubscriptionFields: FC<SubscriptionFieldsProps> = ({ hide }) => {
           className={`table__input ${warning.service ? 'table__input_error' : ''}`}
           onChange={(e) => debounce(e.target.value, 'service')}
         />
-        {warning.service && <span className="popup-input__text_error">error</span>}
+        {warning.service && <span className="popup-input__text_error">Min 3 characters, max 20</span>}
       </div>
       <div className="table__cell table__cell_column-center">
         <input
@@ -120,7 +120,7 @@ const SubscriptionFields: FC<SubscriptionFieldsProps> = ({ hide }) => {
           onChange={(e) => debounce(e.target.value, 'price')}
           className={`table__input table__input_small ${warning.price ? 'table__input_error' : ''}`}
         />
-        {warning.price && <span className="popup-input__text_error">error</span>}
+        {warning.price && <span className="popup-input__text_error">More than zero</span>}
       </div>
       <div className="table__cell table__cell_column-center">
         <input
@@ -130,7 +130,7 @@ const SubscriptionFields: FC<SubscriptionFieldsProps> = ({ hide }) => {
           onChange={(e) => debounce(e.target.value, 'paymentDay')}
           className={`table__input table__input_small ${warning.paymentDay ? 'table__input_error' : ''}`}
         />
-        {warning.paymentDay && <span className="popup-input__text_error">error</span>}
+        {warning.paymentDay && <span className="popup-input__text_error">Incorrect day</span>}
       </div>
       <div className="table__cell table__cell_buttons table__cell_buttons_visible">
         <button className="table__btn" onClick={submit}>

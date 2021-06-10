@@ -22,7 +22,7 @@ const LeftBar = () => {
 
   useEffect(() => {
     loadSubscr()
-  }, []) //eslint-disable-line
+  }, [])
 
   useEffect(() => {
     console.log(toJS(subscriptions))
